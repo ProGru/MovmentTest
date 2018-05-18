@@ -6,9 +6,12 @@ public class ObjectStack : MonoBehaviour {
 
     public int counter = 0;
     private MainManager mainManager;
+    private AttackMaker attackMaker;
 
     private void Start()
-    {
+    { 
+        this.gameObject.AddComponent<AttackMaker>();
+        attackMaker = GetComponent<AttackMaker>();
         mainManager = FindObjectOfType<MainManager>();
     }
 
@@ -22,27 +25,18 @@ public class ObjectStack : MonoBehaviour {
             {
                 if (other.GetComponent<ObjectStack>().counter == 0)
                 {
-                    if (other.GetComponent<ObjectTransform>().typeOfWarior == this.GetComponent<ObjectTransform>().typeOfWarior)
-                    {
                         counter += 1;
-                        if (other.GetComponent<ObjectTransform>().wrogosc == this.GetComponent<ObjectTransform>().wrogosc)
-                        {
-                            this.GetComponent<ObjectTransform>().quantityMilitary +=
-                            other.GetComponent<ObjectTransform>().quantityMilitary;
-                            Destroy(other.gameObject);
-                        }
-                        else if (other.GetComponent<ObjectTransform>().wrogosc > 1 || this.GetComponent<ObjectTransform>().wrogosc > 1)
-                        {
-                            //this.GetComponent<ObjectTransform>().quantityMilitary +=
-                            //                        other.GetComponent<ObjectTransform>().quantityMilitary;
-                            //Destroy(other.gameObject);
-                        }
-                        else
-                        {
-                            this.GetComponent<ObjectTransform>().quantityMilitary -=
-                            other.GetComponent<ObjectTransform>().quantityMilitary;
-                            Destroy(other.gameObject);
-                        }
+                    if (other.GetComponent<Soldier>().wrogosc == this.GetComponent<Soldier>().wrogosc)
+                    {
+                        attackMaker.makeStack(this.gameObject, other.gameObject);
+                    }
+                    else if (other.GetComponent<Soldier>().wrogosc > 1 || this.GetComponent<Soldier>().wrogosc > 1)
+                    {
+                        attackMaker.makeSojusz(this.gameObject, other.gameObject);
+                    }
+                    else
+                    {
+                        attackMaker.makeAttack(this.gameObject, other.gameObject);
                     }
                 }
             }

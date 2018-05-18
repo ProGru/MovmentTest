@@ -404,6 +404,10 @@
     <Compile Include="Assets\Scripts\Destroy\DestroyMainMenager.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyTeren.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyZamki.cs" />
+    <Compile Include="Assets\Scripts\Inne\AttackMaker.cs" />
+    <Compile Include="Assets\Scripts\Inne\Millitary.cs" />
+    <Compile Include="Assets\Scripts\Inne\RekrutacjaWojska.cs" />
+    <Compile Include="Assets\Scripts\Inne\Soldier.cs" />
     <Compile Include="Assets\Scripts\Interfejs\Menu.cs" />
     <Compile Include="Assets\Scripts\Interfejs\MenuFunctions.cs" />
     <Compile Include="Assets\Scripts\Jednostka\ObjectStack.cs" />

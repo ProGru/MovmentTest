@@ -8,11 +8,12 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MenuFunctions : MonoBehaviour {
 
-    public Canvas menuCanvas;
-    public Canvas addSoldierCanvas;
-    public Canvas inventoryCanvas;
+    public Canvas economyCanvas;
+    public Canvas rekrutacjaCanvas;
+    public Canvas nextRound;
     public GameObject[] army;
     public Text text;
+    public Text gold;
     GameObject currentObject = null;
     Vector3 detinationPosition;
     RaycastHit hit;
@@ -24,14 +25,15 @@ public class MenuFunctions : MonoBehaviour {
     private void Start()
     {
         mainManager = FindObjectOfType<MainManager>();
-        inventoryCanvas = inventoryCanvas.GetComponent<Canvas>();
-        menuCanvas = menuCanvas.GetComponent<Canvas>();
-        addSoldierCanvas = addSoldierCanvas.GetComponent<Canvas>();
+        economyCanvas = economyCanvas.GetComponent<Canvas>();
+        rekrutacjaCanvas = rekrutacjaCanvas.GetComponent<Canvas>();
+        nextRound = nextRound.GetComponent<Canvas>();
         text = text.GetComponent<Text>();
+        gold = gold.GetComponent<Text>();
         Time.timeScale = 1;
-        menuCanvas.enabled = true;
-        addSoldierCanvas.enabled = false;
-        inventoryCanvas.enabled = false;
+        economyCanvas.enabled = false;
+        rekrutacjaCanvas.enabled = false;
+        GoldButton();
     }
 
     /// <summary>
@@ -41,6 +43,12 @@ public class MenuFunctions : MonoBehaviour {
     {
         mainManager.nextRound();
         text.text = mainManager.getTura().ToString();
+        GoldButton();
+    }
+
+    public void GoldButton()
+    {
+        gold.text = mainManager.gold.ToString();
     }
 
     public void ChangeAddMilitaryStatus(int i)
@@ -58,19 +66,22 @@ public class MenuFunctions : MonoBehaviour {
     private void SetObjectProperty(GameObject obj, Vector3 castlePosition)
     {
         obj.GetComponent<ObjectTransform>().canEntry = false;
+        obj.GetComponent<ObjectTransform>().yours = castle.GetComponent<CastleEntry>().yours;
+
 
         Physics.Raycast(castlePosition + new Vector3(0, 0, 10), Camera.main.transform.forward, out hit, 10000);
 
         obj.transform.position = hit.point;
 
-        obj.GetComponent<ObjectTransform>().quantityMilitary = castle.GetComponent<CastleEntry>()
+        obj.GetComponent<Millitary>().quantityMilitarySolo = castle.GetComponent<CastleEntry>()
             .quantityMilitary[createTypeOf];
 
-        obj.GetComponent<ObjectTransform>().wrogosc = castle.GetComponent<CastleEntry>().wrogosc;
+        obj.GetComponent<Soldier>().wrogosc = castle.GetComponent<CastleEntry>().wrogosc;
 
         castle.GetComponent<CastleEntry>().quantityMilitary[createTypeOf] = 0;
 
-        obj.GetComponent<ObjectTransform>().typeOfWarior = createTypeOf;
+        obj.GetComponent<Soldier>().typeOfWarior = createTypeOf;
+        mainManager.army.Add(obj.GetComponent<Soldier>());
     }
 
     private void Update()
@@ -111,9 +122,7 @@ public class MenuFunctions : MonoBehaviour {
                 currentObject = null;
 
                 addMilitaryStatus = false;
-                addSoldierCanvas.enabled = false;
-                inventoryCanvas.enabled = false;
-                menuCanvas.enabled = true;
+                rekrutacjaCanvas.enabled = false;
             }
         }
     }
@@ -125,8 +134,19 @@ public class MenuFunctions : MonoBehaviour {
     public void ReloadCanvas(GameObject whithCastle)
     {
         castle = whithCastle;
-        addSoldierCanvas.enabled = false;
-        inventoryCanvas.enabled = true;
-        menuCanvas.enabled = false;
+        rekrutacjaCanvas.enabled = true;
+        economyCanvas.enabled = false;
+    }
+
+    public void LoadEconomyCnavas()
+    {
+        rekrutacjaCanvas.enabled = false;
+        economyCanvas.enabled = true;
+    }
+
+    public void LoadRekrutacjaCanvas()
+    {
+        rekrutacjaCanvas.enabled = true;
+        economyCanvas.enabled = false;
     }
 }

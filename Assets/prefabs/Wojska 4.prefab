@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 135582211406759118}
   - component: {fileID: 195070209736469370}
   - component: {fileID: 114337781386765628}
+  - component: {fileID: 114215353568383374}
+  - component: {fileID: 114116575421849548}
   m_Layer: 0
   m_Name: Wojska 4
   m_TagString: Untagged
@@ -114,14 +116,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238d21ac8edbe3948a32e6bcc9a70db7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  maxDistancePerRound: 100
-  quantityMilitary: 15
-  wrogosc: 0
   canEntry: 1
   makeDistance: 0
   canBeMoved: 1
-  typeOfWarior: 0
+  yours: 0
+--- !u!114 &114116575421849548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623594146759766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b67a8d2358cf424da94f5c5d10a2070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multi: 0
+  quantityMilitarySolo: 0
+  quantityMilitaryMulti: 0000000000000000000000000000000000000000
+--- !u!114 &114215353568383374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623594146759766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c73aa15d3229cc49a447325c44fb08f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  maxDistancePerRound: 100
+  wrogosc: 0
+  typeOfWarior: 4
 --- !u!114 &114337781386765628
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -16,19 +16,15 @@ public class ObjectTransform : MonoBehaviour
     Vector3 newPosition;
     Quaternion newRotation;
     NavMeshAgent _navMeshAgent;
-    public float speed=2;
-    public float maxDistancePerRound = 100;
-    public int quantityMilitary = 15;
-    // 0-nasze, 1-wrog, >1 -sojusz 
-    public int wrogosc = 0;
+    Soldier soldier;
     private bool selected = false;
     public bool canEntry = true;
     CastleEntry[] platforms;
     private MainManager mainManager;
     public float makeDistance = 0;
     public bool canBeMoved = true;
-    //0-lucznik, 1-konnica, 2-piechota, 3-woj, 4-szpieg
-    public int typeOfWarior = 0;
+    public bool yours = false;
+
 
     /// <summary>
     /// dystans od pozycji do obiektu
@@ -66,8 +62,28 @@ public class ObjectTransform : MonoBehaviour
 
             if (disctance(newPosition, platforms[i].gameObject) <= 100)
             {
-                platforms[i].gameObject.SetActive(true);
+                if (!platforms[i].GetComponent<CastleEntry>().yours)
+                {
+                    platforms[i].gameObject.SetActive(true);
+                }
             }
+        }
+        ArrayList army = mainManager.army;
+        for (int i = 0; i < army.Count; i++)
+        {
+            Soldier soldier = (Soldier)army[i];
+            if (soldier != null)
+            {
+                if (disctance(newPosition, soldier.gameObject) <= 100)
+                {
+                    soldier.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                army.RemoveAt(i);
+            }
+
         }
     }
 
@@ -84,6 +100,19 @@ public class ObjectTransform : MonoBehaviour
                 if (disctance(newPosition, platforms[i].gameObject) >= 100)
                 {
                     platforms[i].gameObject.SetActive(false);
+                }
+            }
+
+        }
+        ArrayList army = mainManager.army;
+        for (int i = 0; i < army.Count; i++)
+        {
+            Soldier soldier = (Soldier)army[i];
+            if (soldier.wrogosc != 0)
+            {
+                if (disctance(newPosition, soldier.gameObject) >= 100)
+                {
+                    soldier.gameObject.SetActive(false);
                 }
             }
 
@@ -117,7 +146,7 @@ public class ObjectTransform : MonoBehaviour
     /// <returns></returns>
     private bool canGoMoreInRound(Vector3 actualyPosition, Vector3 destinationPosition)
     {
-        if (this.disctance(actualyPosition, destinationPosition) + makeDistance > maxDistancePerRound)
+        if (this.disctance(actualyPosition, destinationPosition) + makeDistance > soldier.maxDistancePerRound)
         {
             return false;
         }
@@ -130,6 +159,7 @@ public class ObjectTransform : MonoBehaviour
 
     private void Start()
     {
+        soldier = GetComponent<Soldier>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         newPosition = transform.position;
         mainManager = FindObjectOfType<MainManager>();
@@ -171,17 +201,20 @@ public class ObjectTransform : MonoBehaviour
     {
         Renderer rend = GetComponent<Renderer>();
         rend.material.SetColor("_Color", beforeColor);
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000))
+        if (this.yours)
         {
-            if (hit.transform.name == gameObject.transform.name)
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000))
             {
-                Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, 100);
+                if (hit.transform.name == gameObject.transform.name)
+                {
+                    Physics.Raycast(transform.position, Camera.main.transform.forward, out hit, 100);
+                }
+
+                newRotation = Quaternion.LookRotation(hit.point - transform.position);
+                this.SetTargetDestination(hit.point + new Vector3(0, 1, 0));
+
+                SetCastelsUnvisibility();
             }
-
-            newRotation = Quaternion.LookRotation(hit.point - transform.position);
-            this.SetTargetDestination(hit.point + new Vector3(0, 1, 0));
-
-            SetCastelsUnvisibility();
         }
     }
 
