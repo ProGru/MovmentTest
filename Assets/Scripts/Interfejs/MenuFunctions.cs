@@ -11,6 +11,7 @@ public class MenuFunctions : MonoBehaviour {
     public Canvas economyCanvas;
     public Canvas rekrutacjaCanvas;
     public Canvas nextRound;
+    public GameObject infoWindow;
     public GameObject[] army;
     public Text text;
     public Text gold;
@@ -33,6 +34,7 @@ public class MenuFunctions : MonoBehaviour {
         Time.timeScale = 1;
         economyCanvas.enabled = false;
         rekrutacjaCanvas.enabled = false;
+        infoWindow.SetActive(false);
         GoldButton();
     }
 
@@ -134,14 +136,23 @@ public class MenuFunctions : MonoBehaviour {
     public void ReloadCanvas(GameObject whithCastle)
     {
         castle = whithCastle;
-        rekrutacjaCanvas.enabled = true;
-        economyCanvas.enabled = false;
+        if (castle.GetComponent<CastleEntry>().wrogosc == 0)
+        {
+            rekrutacjaCanvas.enabled = true;
+            economyCanvas.enabled = false;
+        }
     }
 
     public void LoadEconomyCnavas()
     {
         rekrutacjaCanvas.enabled = false;
         economyCanvas.enabled = true;
+    }
+
+    public void CloseCanvas()
+    {
+        rekrutacjaCanvas.enabled = false;
+        economyCanvas.enabled = false;
     }
 
     public void LoadRekrutacjaCanvas()

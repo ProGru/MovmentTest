@@ -17,6 +17,18 @@ public class CastleEntry : MonoBehaviour {
     private AttackMaker attackMaker;
     MainManager mainManager;
 
+    public void setCastleColor(int i)
+    {
+        Renderer rend = GetComponent<Renderer>();
+        if (i == 0)
+        {
+            rend.material.SetColor("_Color", Color.black);
+        }else
+        {
+            rend.material.SetColor("_Color", Color.red);
+        }
+    }
+
     private void Start()
     {
         this.gameObject.AddComponent<AttackMaker>();

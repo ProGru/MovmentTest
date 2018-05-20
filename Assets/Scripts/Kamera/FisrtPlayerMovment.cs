@@ -25,6 +25,7 @@ public class FisrtPlayerMovment : MonoBehaviour {
         if (lockCursor)
         {
             Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
         _rigidbody = GetComponent<Rigidbody>();
 	}
@@ -50,6 +51,7 @@ public class FisrtPlayerMovment : MonoBehaviour {
         if (Input.GetKeyDown("escape"))
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 	}
 

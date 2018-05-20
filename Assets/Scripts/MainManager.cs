@@ -22,7 +22,7 @@ public class MainManager : MonoBehaviour {
     private ArrayList rekrutacjaQueue = new ArrayList();
     private int[] rekrutacjaTime = new int[] { 2, 1, 2, 3, 2 };
     private int[] bouldingLevel = new int[] { 0, 0, 0, 0, 0, 0 };
-    private int[] bouldingbonus = new int[] { 0, 0, 1000, 0, 0, 0 };
+    public int[] bouldingbonus = new int[] { 0, 0, 1000, 0, 0, 0 };
     static private int[] bouldingAddBonus = new int[] {100,100,100,100,100,100};
     private int[] bouldingProgres = new int[] { 0, 0, 0, 0, 0, 0 };
     private int[] bouldingTime = new int[] { 2, 2, 3, 2, 3, 2 };
@@ -35,6 +35,7 @@ public class MainManager : MonoBehaviour {
     private int[] placGoldForLvl = new int[] { 500, 700 };
     private int[] koszaryGoldForLvl = new int[] { 800, 1600 };
     private int[] fortyfikacjaGoldForLvl = new int[] { 300, 500 };
+    private int[] armyGoldForEach = new int[] { 100, 100, 100, 100, 100 };
     private int paymentPerSingleWarrior = 5;
 
 
@@ -301,7 +302,7 @@ public class MainManager : MonoBehaviour {
         rekrutacjaWojska.typeOfWarior = typeOfWarior;
         rekrutacjaWojska.rouldLeft = -rekrutacjaTime[typeOfWarior];
         rekrutacjaQueue.Add(rekrutacjaWojska);
-        //dopisac pobor opłat
+        gold -= armyGoldForEach[typeOfWarior];
         menuFunctions.GoldButton();
     }
 

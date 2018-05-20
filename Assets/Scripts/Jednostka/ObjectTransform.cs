@@ -146,7 +146,7 @@ public class ObjectTransform : MonoBehaviour
     /// <returns></returns>
     private bool canGoMoreInRound(Vector3 actualyPosition, Vector3 destinationPosition)
     {
-        if (this.disctance(actualyPosition, destinationPosition) + makeDistance > soldier.maxDistancePerRound)
+        if (this.disctance(actualyPosition, destinationPosition) + makeDistance > soldier.maxDistancePerRound+mainManager.bouldingbonus[0])
         {
             return false;
         }
