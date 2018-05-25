@@ -54,4 +54,15 @@ public class CastleEntry : MonoBehaviour {
         //Angela Tutaj!
         menuFunctions.ReloadCanvas(this.gameObject);
     }
+
+    void showQuantityMilitaryInfo()
+    {
+        Debug.Log("index 0:" + quantityMilitary[0]);
+
+    }
+
+    private void OnMouseEnter()
+    {
+        showQuantityMilitaryInfo();
+    }
 }

@@ -413,8 +413,10 @@
     <Compile Include="Assets\Scripts\Inne\Soldier.cs" />
     <Compile Include="Assets\Scripts\Interfejs\Menu.cs" />
     <Compile Include="Assets\Scripts\Interfejs\MenuFunctions.cs" />
+    <Compile Include="Assets\Scripts\Jednostka\FabulaAction.cs" />
     <Compile Include="Assets\Scripts\Jednostka\ObjectStack.cs" />
     <Compile Include="Assets\Scripts\Jednostka\ObjectTransform.cs" />
+    <Compile Include="Assets\Scripts\Jednostka\OponentInteligence.cs" />
     <Compile Include="Assets\Scripts\Kamera\BoxSelection.cs" />
     <Compile Include="Assets\Scripts\Kamera\FisrtPlayerMovment.cs" />
     <Compile Include="Assets\Scripts\Kamera\PutItemsOnScrean.cs" />

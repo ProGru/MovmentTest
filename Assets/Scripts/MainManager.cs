@@ -15,7 +15,7 @@ public class MainManager : MonoBehaviour {
     public DestroyTeren destroyTeren;
     public DestroyZamki destroyZamki;
     public DestroyInterfejs destroyInterfejs;
-    public ArrayList army;
+    public ArrayList army= new ArrayList();
     public MenuFunctions menuFunctions;
     // drogi/zamek/targ/plac cwiczen/koszary/fortyfikacja
     public int gold = 1000;
@@ -43,12 +43,16 @@ public class MainManager : MonoBehaviour {
     {
         //menuFunctions = GetComponent<MenuFunctions>();
         castles = Component.FindObjectsOfType<CastleEntry>();
-        army = new ArrayList();
         Soldier[] objectTransform = FindObjectsOfType<Soldier>();
-        for (int i=0;i< objectTransform.Length; i++)
+        for (int i = 0; i < objectTransform.Length; i++)
         {
             army.Add(objectTransform[i]);
-        }        
+        }
+
+        for (int i = 0; i < objectTransform.Length; i++)
+        {
+            objectTransform[i].GetComponent<ObjectTransform>().SetCastelsUnvisibility();
+        }
     }
 
     public void setParentJednostki(GameObject obj)

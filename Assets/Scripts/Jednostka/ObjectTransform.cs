@@ -90,7 +90,7 @@ public class ObjectTransform : MonoBehaviour
     /// <summary>
     /// ustawia widzialnosc zamkow na FALSE
     /// </summary>
-    private void SetCastelsUnvisibility()
+    public void SetCastelsUnvisibility()
     {
         platforms = mainManager.getCastles();
         for (int i = 0; i < platforms.Length; i++)
@@ -172,9 +172,22 @@ public class ObjectTransform : MonoBehaviour
         rend.material.SetColor("_Color", Color.yellow);
     }
 
+    void showQuantityMilitaryInformation()
+    {
+        if (GetComponent<Millitary>().multi)
+        {
+            Debug.Log("Multi :" + GetComponent<Millitary>().quantityMilitaryMulti[0]);
+        }
+        else
+        {
+            Debug.Log("Solo :" + GetComponent<Millitary>().quantityMilitarySolo);
+        }
+    }
+
     private void OnMouseEnter()
     {
         Renderer rend = GetComponent<Renderer>();
+        showQuantityMilitaryInformation();
         if (rend.material.GetColor("_Color") != Color.red && rend.material.GetColor("_Color") != Color.yellow)
         {
             beforeColor = rend.material.GetColor("_Color");
@@ -259,5 +272,15 @@ public class ObjectTransform : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void setAttackTarget(Vector3 position)
+    {
+        newPosition = position;
+    }
+
+    public Vector3 getAttackTarget()
+    {
+        return newPosition;
     }
 }

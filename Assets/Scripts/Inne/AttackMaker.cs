@@ -7,7 +7,7 @@ public class AttackMaker : MonoBehaviour {
     private MainManager mainManager;
     private int[] soldiersHP = new int[] { 110, 120, 130, 150, 50 };
     private int[] soldierDEF = new int[] { 50, 70, 80, 90, 20 };
-    private int[] soldierATACK = new int[] { 110, 100, 95, 130, 95 };
+    private int[] soldierATACK = new int[] { 110, 100, 95, 130, 55 };
 
     private bool winAttacker = false;
 
