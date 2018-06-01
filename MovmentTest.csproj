@@ -400,6 +400,7 @@
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\TiltInput.cs" />
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\Knight\scripts\rotator.cs" />
     <Compile Include="Assets\Scripts\AnimatorControlerKnight.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyInterfejs.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyJednostki.cs" />
@@ -569,6 +570,7 @@
     <None Include="Assets\Imports\ProCore\ProGrids\Shader\pg_GridShader.shader" />
     <None Include="Assets\Imports\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
     <None Include="Assets\Imports\Standard Assets\Fonts\OpenSans\License!.txt" />
+    <None Include="Assets\Knight\shaders\doublesidedshader.shader" />
     <None Include="Assets\Standard Assets\Environment\Water (Basic)\Shaders\FXWaterBasic.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
     <None Include="Assets\Standard Assets\Environment\Water\Water4\Shaders\FXWater4Advanced.shader" />

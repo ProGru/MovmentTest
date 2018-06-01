@@ -43,6 +43,7 @@ public class CastleEntry : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.GetComponent<ObjectTransform>().canEntry)
         {
             attackMaker.makeCastleAttack(other.gameObject, this.gameObject);
@@ -57,7 +58,7 @@ public class CastleEntry : MonoBehaviour {
 
     void showQuantityMilitaryInfo()
     {
-        Debug.Log("index 0:" + quantityMilitary[0]);
+       Debug.Log("index 0:" + quantityMilitary[0]);
 
     }
 

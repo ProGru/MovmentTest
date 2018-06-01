@@ -80,7 +80,7 @@ public class OponentInteligence : MonoBehaviour {
         {
             if (soldiers[i].wrogosc == 0)
             {
-                if (disctance(this.transform.position, soldiers[i].gameObject) < 100)
+                if (disctance(this.transform.position, soldiers[i].gameObject) < 100 && soldiers[i].typeOfWarior == 4)
                 {
                     mode = 1;
                     startPosition = this.transform.position;

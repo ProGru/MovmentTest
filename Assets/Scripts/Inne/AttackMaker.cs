@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackMaker : MonoBehaviour {
+public class AttackMaker : MonoBehaviour
+{
 
     private MainManager mainManager;
     private int[] soldiersHP = new int[] { 110, 120, 130, 150, 50 };
@@ -14,6 +15,10 @@ public class AttackMaker : MonoBehaviour {
 
     private void Start()
     {
+        if (this.GetComponent<MeshRenderer>() == null)
+        {
+            this.gameObject.AddComponent<MeshRenderer>();
+        }
         mainManager = FindObjectOfType<MainManager>();
     }
 
@@ -27,7 +32,7 @@ public class AttackMaker : MonoBehaviour {
         int attackerType = attackerSoldier.wrogosc;
         int defenderType = defenderSoldier.wrogosc;
 
-        ArrayList winner = atackSoldiers(attacker, defender,attackerType,defenderType);
+        ArrayList winner = atackSoldiers(attacker, defender, attackerType, defenderType);
 
         if (winAttacker)
         {
@@ -118,7 +123,7 @@ public class AttackMaker : MonoBehaviour {
             else
             {
                 attacker.multi = true;
-                GetComponent<Renderer>().material.color= Color.black;
+                GetComponent<Renderer>().material.color = Color.black;
                 attacker.quantityMilitaryMulti[attackerSoldier.typeOfWarior] = attacker.quantityMilitarySolo;
                 attacker.quantityMilitaryMulti[defenderSoldier.typeOfWarior] = defender.quantityMilitarySolo;
                 Destroy(defenderObject);
@@ -144,7 +149,7 @@ public class AttackMaker : MonoBehaviour {
         }
     }
 
-    public void makeCastleAttack(GameObject attackerObject,GameObject castleObject)
+    public void makeCastleAttack(GameObject attackerObject, GameObject castleObject)
     {
         Millitary attacker = attackerObject.GetComponent<Millitary>();
         Soldier attackerSoldier = attackerObject.GetComponent<Soldier>();
@@ -172,35 +177,34 @@ public class AttackMaker : MonoBehaviour {
             int castleType = castle.wrogosc;
 
             ArrayList winer = atackCastle(attacker, castle, attackerType, castleType);
-            Destroy(attackerObject);
             if (winAttacker)
             {
                 castle.quantityMilitary = ReparseToMultiSoldierQuantityMilitary(winer);
                 castle.wrogosc = attackerSoldier.wrogosc;
-                castle.setCastleColor(attackerSoldier.wrogosc);
                 if (attackerSoldier.wrogosc == 0)
                 {
                     castle.yours = true;
                 }
-                Destroy(attackerObject);
+                castle.setCastleColor(attackerSoldier.wrogosc);
             }
             else
             {
                 castle.quantityMilitary = ReparseToMultiSoldierQuantityMilitary(winer);
-                Destroy(attackerObject);
             }
         }
+        Destroy(attackerObject);
     }
-    
+
     public ArrayList MultiSoldierParser(int[] millitary, int type)
     {
         ArrayList single = new ArrayList();
-        for(int i = 0; i < millitary.Length; i++)
+        for (int i = 0; i < millitary.Length; i++)
         {
-            for (int j = 0; j < millitary[i]; j++) {
+            for (int j = 0; j < millitary[i]; j++)
+            {
                 if (type == 0)
                 {
-                    single.Add(new SingleSoldier(soldiersHP[i], i, soldierDEF[i], soldierATACK[i]+mainManager.bouldingbonus[4]));
+                    single.Add(new SingleSoldier(soldiersHP[i], i, soldierDEF[i], soldierATACK[i] + mainManager.bouldingbonus[4]));
                 }
                 else
                 {
@@ -211,7 +215,7 @@ public class AttackMaker : MonoBehaviour {
         }
         return single;
     }
-    public ArrayList SingleSoldierParser(int quantityMilitarySolo, int typeOfWarior,int type)
+    public ArrayList SingleSoldierParser(int quantityMilitarySolo, int typeOfWarior, int type)
     {
         ArrayList single = new ArrayList();
         for (int i = 0; i < quantityMilitarySolo; i++)
@@ -219,7 +223,7 @@ public class AttackMaker : MonoBehaviour {
             if (type == 0)
             {
                 single.Add(new SingleSoldier(soldiersHP[typeOfWarior], typeOfWarior, soldierDEF[typeOfWarior],
-                    soldierATACK[typeOfWarior]+mainManager.bouldingbonus[4]));
+                    soldierATACK[typeOfWarior] + mainManager.bouldingbonus[4]));
             }
             else
             {
@@ -230,7 +234,7 @@ public class AttackMaker : MonoBehaviour {
         return single;
     }
 
-    public int[] ReparseToMultiSoldierQuantityMilitary (ArrayList array)
+    public int[] ReparseToMultiSoldierQuantityMilitary(ArrayList array)
     {
         int[] wynik = new int[] { 0, 0, 0, 0, 0 };
         for (int i = 0; i < array.Count; i++)
@@ -241,13 +245,13 @@ public class AttackMaker : MonoBehaviour {
 
         return wynik;
     }
+
     public int ReparseToSoloSoldierQuantityMilitary(ArrayList array)
     {
         return array.Count;
     }
 
-
-    public ArrayList atackSoldiers(Millitary attacker,Millitary defender, int attackerType ,int defenderType)
+    public ArrayList atackSoldiers(Millitary attacker, Millitary defender, int attackerType, int defenderType)
     {
         ArrayList attackerArray;
         ArrayList defenderArray;
@@ -269,13 +273,13 @@ public class AttackMaker : MonoBehaviour {
 
         if (defender.multi == true)
         {
-            defenderArray = MultiSoldierParser(defender.quantityMilitaryMulti,defenderType);
-            defenderArrayDestroy = MultiSoldierParser(attacker.quantityMilitaryMulti,defenderType);
+            defenderArray = MultiSoldierParser(defender.quantityMilitaryMulti, defenderType);
+            defenderArrayDestroy = MultiSoldierParser(attacker.quantityMilitaryMulti, defenderType);
         }
         else
         {
-            defenderArray = SingleSoldierParser(defender.quantityMilitarySolo, defender.GetComponent<Soldier>().typeOfWarior,defenderType);
-            defenderArrayDestroy = SingleSoldierParser(defender.quantityMilitarySolo, defender.GetComponent<Soldier>().typeOfWarior,defenderType);
+            defenderArray = SingleSoldierParser(defender.quantityMilitarySolo, defender.GetComponent<Soldier>().typeOfWarior, defenderType);
+            defenderArrayDestroy = SingleSoldierParser(defender.quantityMilitarySolo, defender.GetComponent<Soldier>().typeOfWarior, defenderType);
 
         }
 
@@ -363,7 +367,7 @@ public class AttackMaker : MonoBehaviour {
 
     }
 
-    public ArrayList atackCastle(Millitary attacker,CastleEntry castle,int attackerType,int defenderType)
+    public ArrayList atackCastle(Millitary attacker, CastleEntry castle, int attackerType, int defenderType)
     {
         ArrayList defenderArray;
         ArrayList attackerArray;
@@ -483,13 +487,14 @@ public class AttackMaker : MonoBehaviour {
 
     }
 }
-public class SingleSoldier {
+public class SingleSoldier
+{
     public int hp;
     public int typeofWarior;
     public int defence;
     public int attack;
 
-    public SingleSoldier(int hp,int typeOfWarior,int defence, int attack)
+    public SingleSoldier(int hp, int typeOfWarior, int defence, int attack)
     {
         this.hp = hp;
         this.typeofWarior = typeOfWarior;

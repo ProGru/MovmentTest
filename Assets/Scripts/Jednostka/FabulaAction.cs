@@ -2,28 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FabulaAction : MonoBehaviour {
-
+public class FabulaAction : MonoBehaviour
+{
+    private MainManager mainManager;
     public string scriptName;
     public GameObject warior;
     public GameObject[] attackTargetPerRound;
-    public GameObject[] movePerRound;
+    public Vector3[] movePerRound;
     public string[] recruitPerRound;
+    int round_make = -1;
 
     private void Start()
     {
-        for (int i = 0; i < movePerRound.Length; i++)
-        {
-            if (movePerRound[i] != null)
-            {
-                Debug.Log("hola");
-                warior.gameObject.SetActive(true);
-                warior.gameObject.GetComponent<ObjectTransform>().setAttackTarget(movePerRound[i].transform.position);
+        mainManager = FindObjectOfType<MainManager>();
+        //warior = warior.GetComponent<GameObject>();
+    }
 
-            }
-            else
+    private void Update()
+    {
+        if (round_make!=mainManager.getTura())
+        {
+            if (attackTargetPerRound.Length > mainManager.getTura())
             {
+                if (attackTargetPerRound[mainManager.getTura()] != null)
+                {
+                    Debug.Log("i make attack");
+                    warior.SetActive(true);
+                    warior.GetComponent<ObjectTransform>().setAttackTarget(attackTargetPerRound[mainManager.getTura()].transform.position);
+                }
+                else if (movePerRound[mainManager.getTura()] != new Vector3())
+                {
+                    Debug.Log("i make move");
+                    warior.SetActive(true);
+                    warior.GetComponent<ObjectTransform>().setAttackTarget(movePerRound[mainManager.getTura()]);
+                }
             }
+            round_make = mainManager.getTura();
+
         }
     }
 
