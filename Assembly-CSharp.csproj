@@ -150,6 +150,7 @@
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\Knight\scripts\rotator.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\AnimatorControlerKnight.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyInterfejs.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyJednostki.cs" />
@@ -318,11 +319,11 @@
     <None Include="Assets\Imports\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
     <None Include="Assets\Imports\ProCore\Polybrush\Shader\z_TextureBlendModulate_SfSrc.shader" />
     <None Include="Assets\Imports\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
-    <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/Unity/MovmentTest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>D:/Unity/MovmentTest/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.PackageManagerUI.Editor">
+      <HintPath>D:/Unity/MovmentTest/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

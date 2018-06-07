@@ -39,6 +39,7 @@ public class CastleEntry : MonoBehaviour {
         }
         menuFunctions = menuFunctions.GetComponent<MenuFunctions>();
         mainManager = FindObjectOfType<MainManager>();
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,7 +53,6 @@ public class CastleEntry : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        //Angela Tutaj!
         menuFunctions.ReloadCanvas(this.gameObject);
     }
 
@@ -64,6 +64,13 @@ public class CastleEntry : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        showQuantityMilitaryInfo();
+        //showQuantityMilitaryInfo();
+        menuFunctions.PopupWindow("Stark");
+    }
+
+    private void OnMouseExit()
+    {
+        //showQuantityMilitaryInfo();
+        menuFunctions.PopupWindowFalse();
     }
 }

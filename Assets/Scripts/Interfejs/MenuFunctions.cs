@@ -11,6 +11,7 @@ public class MenuFunctions : MonoBehaviour {
     public Canvas economyCanvas;
     public Canvas rekrutacjaCanvas;
     public Canvas nextRound;
+    public Canvas popup;
     public GameObject infoWindow;
     public GameObject[] army;
     public Text text;
@@ -25,6 +26,8 @@ public class MenuFunctions : MonoBehaviour {
 
     private void Start()
     {
+        popup = popup.GetComponent<Canvas>();
+        popup.enabled = false;
         mainManager = FindObjectOfType<MainManager>();
         economyCanvas = economyCanvas.GetComponent<Canvas>();
         rekrutacjaCanvas = rekrutacjaCanvas.GetComponent<Canvas>();
@@ -36,6 +39,15 @@ public class MenuFunctions : MonoBehaviour {
         rekrutacjaCanvas.enabled = false;
         infoWindow.SetActive(false);
         GoldButton();
+    }
+
+    public void PopupWindow(string text) {
+        popup.enabled = true;
+    }
+
+    public void PopupWindowFalse()
+    {
+        popup.enabled = false;
     }
 
     /// <summary>
