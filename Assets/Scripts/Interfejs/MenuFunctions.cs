@@ -23,11 +23,13 @@ public class MenuFunctions : MonoBehaviour {
     private GameObject castle;
     private MainManager mainManager;
     private int createTypeOf;
+    public Text textPopup;
 
     private void Start()
     {
         popup = popup.GetComponent<Canvas>();
         popup.enabled = false;
+        textPopup = textPopup.GetComponent<Text>();
         mainManager = FindObjectOfType<MainManager>();
         economyCanvas = economyCanvas.GetComponent<Canvas>();
         rekrutacjaCanvas = rekrutacjaCanvas.GetComponent<Canvas>();
@@ -43,6 +45,7 @@ public class MenuFunctions : MonoBehaviour {
 
     public void PopupWindow(string text) {
         popup.enabled = true;
+        textPopup.text = text;
     }
 
     public void PopupWindowFalse()
