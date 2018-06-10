@@ -65,6 +65,16 @@ public class MainManager : MonoBehaviour {
         return castles;
     }
 
+    public int[] getBouldingProgres()
+    {
+        return bouldingProgres;
+    }
+
+    public int[] getBouldingLvl()
+    {
+        return bouldingLevel;
+    }
+
     public void nextRound()
     {
         ObjectTransform[] wojska = FindObjectsOfType<ObjectTransform>();
@@ -77,6 +87,7 @@ public class MainManager : MonoBehaviour {
         addRekrutowaneJednostki();
         wyplata();
         poborZaJednostki();
+        menuFunctions.displayAnulacjaBouldings();
     }
 
     public int getTura()
@@ -293,9 +304,43 @@ public class MainManager : MonoBehaviour {
                 {
                     bouldingbonus[i] += bouldingAddBonus[i];
                     bouldingLevel[i] += 1;
+                    menuFunctions.displayBouldingLvl();
                     Debug.Log("Bonus is now:" + bouldingbonus[i].ToString());
                 }
             }
+        }
+    }
+
+    public void deleteBoulding(int boulding)
+    {
+        if (bouldingProgres[boulding] != 0)
+        {
+            bouldingProgres[boulding] = 0;
+            int zwrot = 0;
+            switch (boulding)
+            {
+                case 0:
+                    zwrot = drogiGoldForLvl[bouldingLevel[boulding]];
+                    break;
+                case 1:
+                    zwrot = zamekGoldForLvl[bouldingLevel[boulding]];
+                    break;
+                case 2:
+                    zwrot = targGoldForLvl[bouldingLevel[boulding]];
+                    break;
+                case 3:
+                    zwrot = placGoldForLvl[bouldingLevel[boulding]];
+                    break;
+                case 4:
+                    zwrot = koszaryGoldForLvl[bouldingLevel[boulding]];
+                    break;
+                case 5:
+                    zwrot = fortyfikacjaGoldForLvl[bouldingLevel[boulding]];
+                    break;
+            }
+            gold += zwrot;
+            menuFunctions.GoldButton();
+            Debug.Log("anulacja budowania" + boulding);
         }
     }
 
@@ -334,7 +379,56 @@ public class MainManager : MonoBehaviour {
                 rekrutacjaQueue.RemoveAt(i);
             }
         }
+        menuFunctions.displayAnulacjaWojska();
+        menuFunctions.displayMilitaryInCastle();
 
+    }
+
+    public void deleteRekrutowaneJednostki(CastleEntry castle, int typeOfWarior)
+    {
+        RekrutacjaWojska toRemove = null;
+        for (int i = 0; i < rekrutacjaQueue.Count; i++)
+        {
+            RekrutacjaWojska rekrutacjaWojska = (RekrutacjaWojska)rekrutacjaQueue[i];
+            if (rekrutacjaWojska.castle.Equals(castle))
+            {
+                if (rekrutacjaWojska.typeOfWarior == typeOfWarior)
+                {
+                    if (toRemove != null)
+                    {
+                        if (toRemove.rouldLeft > rekrutacjaWojska.rouldLeft)
+                        {
+                            toRemove = rekrutacjaWojska;
+                        }
+                    }
+                    else
+                    {
+                        toRemove = rekrutacjaWojska;
+                    }
+                }
+            }
+        }
+        if (toRemove != null)
+        {
+            rekrutacjaQueue.Remove(toRemove);
+            gold += armyGoldForEach[toRemove.typeOfWarior];
+            menuFunctions.GoldButton();
+            Debug.Log("anulowano rekrutaacje");
+        }
+    }
+
+    public int[] getMilitaryInRekrutacja(CastleEntry castle)
+    {
+        int[] militaryInCastleRecruit = new int[] { 0, 0, 0, 0, 0 };
+        for (int i = 0; i < rekrutacjaQueue.Count; i++)
+        {
+            RekrutacjaWojska rekrutacjaWojska = (RekrutacjaWojska)rekrutacjaQueue[i];
+            if (rekrutacjaWojska.castle.Equals(castle))
+            {
+                militaryInCastleRecruit[rekrutacjaWojska.typeOfWarior] += 1;
+            }
+        }
+        return militaryInCastleRecruit;
 
     }
 

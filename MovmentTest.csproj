@@ -401,6 +401,7 @@
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\TouchPad.cs" />
     <Compile Include="Assets\Imports\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
     <Compile Include="Assets\Knight\scripts\rotator.cs" />
+    <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\AnimatorControlerKnight.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyInterfejs.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyJednostki.cs" />

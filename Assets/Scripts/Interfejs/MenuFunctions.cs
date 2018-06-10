@@ -35,12 +35,25 @@ public class MenuFunctions : MonoBehaviour {
     public Text numberArmy4;
     public Text numberArmy5;
 
+    public Text numberInCastle0;
+    public Text numberInCastle1;
+    public Text numberInCastle2;
+    public Text numberInCastle3;
+    public Text numberInCastle4;
+
     public Text numberEconomy1;
     public Text numberEconomy2;
     public Text numberEconomy3;
     public Text numberEconomy4;
     public Text numberEconomy5;
     public Text numberEconomy6;
+
+    public Text numberEconomyLvl0;
+    public Text numberEconomyLvl1;
+    public Text numberEconomyLvl2;
+    public Text numberEconomyLvl3;
+    public Text numberEconomyLvl4;
+    public Text numberEconomyLvl5;
 
     public Button cancelArmy5;
     public Button cancelArmy4;
@@ -74,12 +87,25 @@ public class MenuFunctions : MonoBehaviour {
         numberArmy4 = numberArmy4.GetComponent<Text>();
         numberArmy5 = numberArmy5.GetComponent<Text>();
 
+        numberInCastle0 = numberInCastle0.GetComponent<Text>();
+        numberInCastle1 = numberInCastle1.GetComponent<Text>();
+        numberInCastle2 = numberInCastle2.GetComponent<Text>();
+        numberInCastle3 = numberInCastle3.GetComponent<Text>();
+        numberInCastle4 = numberInCastle4.GetComponent<Text>();
+
         numberEconomy1 = numberEconomy1.GetComponent<Text>();
         numberEconomy2 = numberEconomy2.GetComponent<Text>();
         numberEconomy3 = numberEconomy3.GetComponent<Text>();
         numberEconomy4 = numberEconomy4.GetComponent<Text>();
         numberEconomy5 = numberEconomy5.GetComponent<Text>();
         numberEconomy6 = numberEconomy6.GetComponent<Text>();
+
+        numberEconomyLvl0 = numberEconomyLvl0.GetComponent<Text>();
+        numberEconomyLvl1 = numberEconomyLvl1.GetComponent<Text>();
+        numberEconomyLvl2 = numberEconomyLvl2.GetComponent<Text>();
+        numberEconomyLvl3 = numberEconomyLvl3.GetComponent<Text>();
+        numberEconomyLvl4 = numberEconomyLvl4.GetComponent<Text>();
+        numberEconomyLvl5 = numberEconomyLvl5.GetComponent<Text>();
 
         cancelArmy5 = cancelArmy5.GetComponent<Button>();
         cancelArmy5.onClick.AddListener(CancelOnClick1);
@@ -95,6 +121,8 @@ public class MenuFunctions : MonoBehaviour {
 
         cancelArmy1 = cancelArmy1.GetComponent<Button>();
         cancelArmy1.onClick.AddListener(CancelOnClick5);
+        displayAnulacjaBouldings();
+        displayAnulacjaWojska();
     }
 
     public void PopupWindow(string text) {
@@ -124,6 +152,7 @@ public class MenuFunctions : MonoBehaviour {
 
     public void ChangeAddMilitaryStatus(int i)
     {
+        Debug.Log("adam");
         if (castle.GetComponent<CastleEntry>().quantityMilitary[i] > 0)
         {
             if (castle.GetComponent<CastleEntry>().wrogosc < 1)
@@ -207,8 +236,9 @@ public class MenuFunctions : MonoBehaviour {
         castle = whithCastle;
         if (castle.GetComponent<CastleEntry>().wrogosc == 0)
         {
-            armyCanvas.enabled = true;
+            recruitmentCanvas.enabled = true;
             economyCanvas.enabled = false;
+            armyCanvas.enabled = false;
         }
     }
 
@@ -217,6 +247,7 @@ public class MenuFunctions : MonoBehaviour {
         armyCanvas.enabled = false;
         economyCanvas.enabled = true;
         recruitmentCanvas.enabled = false;
+        displayBouldingLvl();
     }
 
     public void CloseCanvas()
@@ -231,6 +262,7 @@ public class MenuFunctions : MonoBehaviour {
         armyCanvas.enabled = true;
         economyCanvas.enabled = false;
         recruitmentCanvas.enabled = false;
+        displayMilitaryInCastle();
     }
 
     public void LoadRecruitmentCanvas()
@@ -240,7 +272,48 @@ public class MenuFunctions : MonoBehaviour {
         recruitmentCanvas.enabled = true;
     }
 
+    public void displayAnulacjaWojska()
+    {
+        int[] rekrutowaneWojska = mainManager.getMilitaryInRekrutacja(castle.GetComponent<CastleEntry>());
+        numberArmy.text = rekrutowaneWojska[0].ToString();
+        numberArmy2.text = rekrutowaneWojska[1].ToString();
+        numberArmy3.text = rekrutowaneWojska[2].ToString();
+        numberArmy4.text = rekrutowaneWojska[3].ToString();
+        numberArmy5.text = rekrutowaneWojska[4].ToString();
+    }
 
+    public void displayAnulacjaBouldings()
+    {
+        int[] bouldingProgres = mainManager.getBouldingProgres();
+        numberEconomy1.text = bouldingProgres[1].ToString();
+        numberEconomy2.text = bouldingProgres[2].ToString();
+        numberEconomy3.text = bouldingProgres[3].ToString();
+        numberEconomy4.text = bouldingProgres[4].ToString();
+        numberEconomy5.text = bouldingProgres[0].ToString();
+        numberEconomy6.text = bouldingProgres[5].ToString();
+    }
+
+    public void displayMilitaryInCastle()
+    {
+        int[] wojskaZamku = castle.GetComponent<CastleEntry>().quantityMilitary;
+
+        numberInCastle0.text = wojskaZamku[0].ToString();
+        numberInCastle1.text = wojskaZamku[1].ToString();
+        numberInCastle2.text = wojskaZamku[2].ToString();
+        numberInCastle3.text = wojskaZamku[3].ToString();
+        numberInCastle4.text = wojskaZamku[4].ToString();
+    }
+
+    public void displayBouldingLvl()
+    {
+        int[] bouldingLvl = mainManager.getBouldingLvl();
+        numberEconomyLvl0.text = bouldingLvl[1].ToString();
+        numberEconomyLvl1.text = bouldingLvl[2].ToString();
+        numberEconomyLvl2.text = bouldingLvl[3].ToString();
+        numberEconomyLvl3.text = bouldingLvl[4].ToString();
+        numberEconomyLvl4.text = bouldingLvl[0].ToString();
+        numberEconomyLvl5.text = bouldingLvl[5].ToString();
+    }
     //just trying
 
     public void TaskOnClick()
@@ -270,88 +343,106 @@ public class MenuFunctions : MonoBehaviour {
 
     public void TaskOnClick1()
     {
-        numberEconomy1.text = "1";
+        displayAnulacjaBouldings();
     }
 
     public void TaskOnClick2()
     {
-        numberEconomy2.text = "1";
+         displayAnulacjaBouldings();
     }
 
     public void TaskOnClick3()
     {
-        numberEconomy3.text = "1";
+        displayAnulacjaBouldings();
     }
 
     public void TaskOnClick4()
     {
-        numberEconomy4.text = "1";
+        displayAnulacjaBouldings();
     }
 
     public void TaskOnClick5()
     {
-        numberEconomy5.text = "1";
+        displayAnulacjaBouldings();
     }
 
     public void TaskOnClick6()
     {
-        numberEconomy6.text = "1";
+        displayAnulacjaBouldings();
     }
 
     public void CancelOnClick1()
     {
-        numberArmy5.text = "0";
+        mainManager.deleteRekrutowaneJednostki(castle.GetComponent<CastleEntry>(), 4);
+        displayAnulacjaWojska();
     }
 
     public void CancelOnClick2()
     {
-        numberArmy4.text = "0";
+        mainManager.deleteRekrutowaneJednostki(castle.GetComponent<CastleEntry>(), 3);
+        displayAnulacjaWojska();
     }
 
     public void CancelOnClick3()
     {
-        numberArmy3.text = "0";
+        mainManager.deleteRekrutowaneJednostki(castle.GetComponent<CastleEntry>(), 2);
+        displayAnulacjaWojska();
     }
 
     public void CancelOnClick4()
     {
-        numberArmy2.text = "0";
+        mainManager.deleteRekrutowaneJednostki(castle.GetComponent<CastleEntry>(), 1);
+        displayAnulacjaWojska();
     }
 
     public void CancelOnClick5()
     {
-        numberArmy.text = "0";
+        mainManager.deleteRekrutowaneJednostki(castle.GetComponent<CastleEntry>(), 0);
+        displayAnulacjaWojska();
     }
 
     public void CancelOnClick11()
     {
-        numberEconomy1.text = "0";
+        mainManager.deleteBoulding(1);
+        displayAnulacjaBouldings();
     }
 
     public void CancelOnClick12()
     {
-        numberEconomy2.text = "0";
+        mainManager.deleteBoulding(2);
+        displayAnulacjaBouldings();
     }
 
     public void CancelOnClick13()
     {
-        numberEconomy3.text = "0";
+        mainManager.deleteBoulding(3);
+        displayAnulacjaBouldings();
     }
 
     public void CancelOnClick14()
     {
-        numberEconomy4.text = "0";
+        mainManager.deleteBoulding(4);
+        displayAnulacjaBouldings();
     }
 
     public void CancelOnClick15()
     {
-        numberEconomy5.text = "0";
+        mainManager.deleteBoulding(0);
+        displayAnulacjaBouldings();
+
     }
 
     public void CancelOnClick16()
     {
-        numberEconomy6.text = "0";
+        mainManager.deleteBoulding(5);
+        displayAnulacjaBouldings();
     }
 
+    public void rekrutujJednostke(int typeOfWarior)
+    {
+        Debug.Log("Rekrutuje" + typeOfWarior);
+        mainManager.rekrutujJednostke(castle.GetComponent<CastleEntry>(), typeOfWarior);
+        displayAnulacjaWojska();
+    }
 
 }
