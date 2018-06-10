@@ -54,6 +54,7 @@ public class MenuFunctions : MonoBehaviour {
 
     public Button cancelArmy5;
     public Button cancelArmy4;
+    public Button cancelArmy3;
 
 
     private void Start()
@@ -89,25 +90,34 @@ public class MenuFunctions : MonoBehaviour {
 
         armySlot = armySlot.GetComponent<Button>();
         armySlot.onClick.AddListener(TaskOnClick);
+
         armySlot2 = armySlot2.GetComponent<Button>();
         armySlot2.onClick.AddListener(TaskOnClick_2);
+
         armySlot3 = armySlot3.GetComponent<Button>();
         armySlot3.onClick.AddListener(TaskOnClick_3);
+
         armySlot4 = armySlot4.GetComponent<Button>();
         armySlot4.onClick.AddListener(TaskOnClick_4);
+
         armySlot5 = armySlot5.GetComponent<Button>();
         armySlot5.onClick.AddListener(TaskOnClick_5);
 
         economySlot1 = economySlot1.GetComponent<Button>();
         economySlot1.onClick.AddListener(TaskOnClick);
+
         economySlot2 = economySlot2.GetComponent<Button>();
         economySlot2.onClick.AddListener(TaskOnClick);
+
         economySlot3 = economySlot3.GetComponent<Button>();
         economySlot3.onClick.AddListener(TaskOnClick);
+
         economySlot4 = economySlot4.GetComponent<Button>();
         economySlot4.onClick.AddListener(TaskOnClick);
+
         economySlot5 = economySlot5.GetComponent<Button>();
         economySlot5.onClick.AddListener(TaskOnClick);
+
         economySlot6 = economySlot6.GetComponent<Button>();
         economySlot6.onClick.AddListener(TaskOnClick);
 
@@ -116,6 +126,11 @@ public class MenuFunctions : MonoBehaviour {
 
         cancelArmy4 = cancelArmy4.GetComponent<Button>();
         cancelArmy4.onClick.AddListener(CancelOnClick2);
+
+        cancelArmy3 = cancelArmy3.GetComponent<Button>();
+        cancelArmy3.onClick.AddListener(CancelOnClick3);
+        
+
        
     }
 
@@ -333,5 +348,11 @@ public class MenuFunctions : MonoBehaviour {
         Debug.Log("Is it working?");
     }
 
- 
+    public void CancelOnClick3()
+    {
+        numberArmy3.text = "0";
+        Debug.Log("Is it working?");
+    }
+
+
 }

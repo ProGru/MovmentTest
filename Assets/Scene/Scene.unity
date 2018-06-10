@@ -2630,9 +2630,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1381512104}
-  - {fileID: 696370660}
   - {fileID: 335128131}
+  - {fileID: 1381512104}
   m_Father: {fileID: 1491608483}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3816,16 +3815,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 335128127}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 696370660}
   m_Father: {fileID: 248489973}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 2.75}
+  m_AnchoredPosition: {x: 4.6389465, y: 2.75}
   m_SizeDelta: {x: 92, y: 85.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &339379798
@@ -7000,12 +7000,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 153732051}
-  m_Father: {fileID: 248489973}
-  m_RootOrder: 1
+  m_Father: {fileID: 335128131}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -2.6388855, y: -2.75}
   m_SizeDelta: {x: 92, y: 91}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696370661
@@ -9060,7 +9060,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 906072958}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1591208712}
+        m_MethodName: CancelOnClick3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &906072958
@@ -12530,7 +12541,7 @@ RectTransform:
   m_LocalScale: {x: 2.5957472, y: 2.2999005, z: 2.3160484}
   m_Children: []
   m_Father: {fileID: 248489973}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14626,6 +14637,7 @@ MonoBehaviour:
   economySlot6: {fileID: 585392099}
   cancelArmy5: {fileID: 526082125}
   cancelArmy4: {fileID: 335128128}
+  cancelArmy3: {fileID: 906072957}
 --- !u!114 &1591208713
 MonoBehaviour:
   m_ObjectHideFlags: 0
