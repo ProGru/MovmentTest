@@ -24,6 +24,7 @@ public class ObjectTransform : MonoBehaviour
     public float makeDistance = 0;
     public bool canBeMoved = true;
     public bool yours = false;
+    public string WojskaName;
 
 
     /// <summary>

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+
 
 /// <summary>
 /// Glowny zarzadca gry:
@@ -37,6 +40,7 @@ public class MainManager : MonoBehaviour {
     private int[] fortyfikacjaGoldForLvl = new int[] { 300, 500 };
     private int[] armyGoldForEach = new int[] { 100, 100, 100, 100, 100 };
     private int paymentPerSingleWarrior = 5;
+    private int warningForNoMoney = 0;
 
 
     public void Start()
@@ -75,8 +79,31 @@ public class MainManager : MonoBehaviour {
         return bouldingLevel;
     }
 
+    public void itsAGameOver()
+    {
+        int yourCastle = 0;
+        for (int i =0; i < castles.Length; i++)
+        {
+            if (castles[i].wrogosc == 0)
+            {
+                yourCastle += 1;
+            }
+        }
+        if (yourCastle == 0 || tura>20)
+        {
+            Debug.Log("GameOver! przekroczyłeś 20 tur lub nie masz zamków");
+            Application.Quit();
+        }
+        if (warningForNoMoney > 2)
+        {
+            Debug.Log("GameOver jesteś zadłuzony");
+            Application.Quit();
+        }
+    }
+
     public void nextRound()
     {
+        itsAGameOver();
         ObjectTransform[] wojska = FindObjectsOfType<ObjectTransform>();
         for (int i = 0; i < wojska.Length; i++)
         {
@@ -463,6 +490,11 @@ public class MainManager : MonoBehaviour {
                     payment += millitary.quantityMilitarySolo * paymentPerSingleWarrior;
                 }
             }
+        }
+        if (payment > gold)
+        {
+            warningForNoMoney += 1;
+            Debug.Log("Nie zarabiasz tyle ile powinienes");
         }
         gold -= payment;
     }

@@ -166,7 +166,7 @@ public class AttackMaker : MonoBehaviour
             }
             else
             {
-                castle.quantityMilitary[attackerSoldier.typeOfWarior] = attacker.quantityMilitarySolo;
+                castle.quantityMilitary[attackerSoldier.typeOfWarior] += attacker.quantityMilitarySolo;
             }
             Destroy(attackerObject);
         }
@@ -184,6 +184,14 @@ public class AttackMaker : MonoBehaviour
                 if (attackerSoldier.wrogosc == 0)
                 {
                     castle.yours = true;
+                    castle.castleName = attackerSoldier.GetComponent<ObjectTransform>().WojskaName;
+                    Debug.Log("Gratulacje przejąłeś zamek");
+                }
+                else
+                {
+                    castle.yours = false;
+                    castle.castleName = attackerSoldier.GetComponent<ObjectTransform>().WojskaName;
+                    Debug.Log("Twój zamek przejął wróg");
                 }
                 castle.setCastleColor(attackerSoldier.wrogosc);
             }

@@ -122,7 +122,6 @@ public class MenuFunctions : MonoBehaviour {
         cancelArmy1 = cancelArmy1.GetComponent<Button>();
         cancelArmy1.onClick.AddListener(CancelOnClick5);
         displayAnulacjaBouldings();
-        displayAnulacjaWojska();
     }
 
     public void PopupWindow(string text) {
@@ -240,6 +239,7 @@ public class MenuFunctions : MonoBehaviour {
             economyCanvas.enabled = false;
             armyCanvas.enabled = false;
         }
+        displayAnulacjaWojska();
     }
 
     public void LoadEconomyCnavas()
@@ -274,12 +274,15 @@ public class MenuFunctions : MonoBehaviour {
 
     public void displayAnulacjaWojska()
     {
-        int[] rekrutowaneWojska = mainManager.getMilitaryInRekrutacja(castle.GetComponent<CastleEntry>());
-        numberArmy.text = rekrutowaneWojska[0].ToString();
-        numberArmy2.text = rekrutowaneWojska[1].ToString();
-        numberArmy3.text = rekrutowaneWojska[2].ToString();
-        numberArmy4.text = rekrutowaneWojska[3].ToString();
-        numberArmy5.text = rekrutowaneWojska[4].ToString();
+        if (castle != null)
+        {
+            int[] rekrutowaneWojska = mainManager.getMilitaryInRekrutacja(castle.GetComponent<CastleEntry>());
+            numberArmy.text = rekrutowaneWojska[0].ToString();
+            numberArmy2.text = rekrutowaneWojska[1].ToString();
+            numberArmy3.text = rekrutowaneWojska[2].ToString();
+            numberArmy4.text = rekrutowaneWojska[3].ToString();
+            numberArmy5.text = rekrutowaneWojska[4].ToString();
+        }
     }
 
     public void displayAnulacjaBouldings()
@@ -295,13 +298,16 @@ public class MenuFunctions : MonoBehaviour {
 
     public void displayMilitaryInCastle()
     {
-        int[] wojskaZamku = castle.GetComponent<CastleEntry>().quantityMilitary;
+        if (castle != null)
+        {
+            int[] wojskaZamku = castle.GetComponent<CastleEntry>().quantityMilitary;
 
-        numberInCastle0.text = wojskaZamku[0].ToString();
-        numberInCastle1.text = wojskaZamku[1].ToString();
-        numberInCastle2.text = wojskaZamku[2].ToString();
-        numberInCastle3.text = wojskaZamku[3].ToString();
-        numberInCastle4.text = wojskaZamku[4].ToString();
+            numberInCastle0.text = wojskaZamku[0].ToString();
+            numberInCastle1.text = wojskaZamku[1].ToString();
+            numberInCastle2.text = wojskaZamku[2].ToString();
+            numberInCastle3.text = wojskaZamku[3].ToString();
+            numberInCastle4.text = wojskaZamku[4].ToString();
+        }
     }
 
     public void displayBouldingLvl()

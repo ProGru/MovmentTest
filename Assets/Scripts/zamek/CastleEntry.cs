@@ -15,6 +15,7 @@ public class CastleEntry : MonoBehaviour {
     public MenuFunctions menuFunctions;
     private Collider lastCollision;
     private AttackMaker attackMaker;
+    public string castleName = "set Your Own";
     MainManager mainManager;
 
     public void setCastleColor(int i)
@@ -48,6 +49,7 @@ public class CastleEntry : MonoBehaviour {
         if (other.GetComponent<ObjectTransform>().canEntry)
         {
             attackMaker.makeCastleAttack(other.gameObject, this.gameObject);
+            menuFunctions.displayMilitaryInCastle();
         }
     }
 
@@ -65,7 +67,7 @@ public class CastleEntry : MonoBehaviour {
     private void OnMouseEnter()
     {
         //showQuantityMilitaryInfo();
-        menuFunctions.PopupWindow("Wrogosc: "+wrogosc.ToString()+"\n ilosc wojsk: "+ quantityMilitary.ToString());
+        menuFunctions.PopupWindow(castleName+"\n ilosc wojsk: "+ quantityMilitary.ToString());
     }
 
     private void OnMouseExit()

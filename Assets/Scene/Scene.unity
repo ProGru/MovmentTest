@@ -568,6 +568,7 @@ MonoBehaviour:
   wrogosc: 1
   yours: 0
   menuFunctions: {fileID: 1591208712}
+  castleName: set Your Own
 --- !u!65 &54501197
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1990,6 +1991,11 @@ Prefab:
         type: 2}
       propertyPath: quantityMilitary.Array.data[4]
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943503251874268, guid: 0d18888d78d9584429ee60f5fa6c5779,
+        type: 2}
+      propertyPath: castleName
+      value: Lanisterowie
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d18888d78d9584429ee60f5fa6c5779, type: 2}
@@ -6155,7 +6161,7 @@ Prefab:
     - target: {fileID: 114943503251874268, guid: 0d18888d78d9584429ee60f5fa6c5779,
         type: 2}
       propertyPath: wrogosc
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 65328906114874028, guid: 0d18888d78d9584429ee60f5fa6c5779,
         type: 2}
@@ -6194,7 +6200,12 @@ Prefab:
     - target: {fileID: 114943503251874268, guid: 0d18888d78d9584429ee60f5fa6c5779,
         type: 2}
       propertyPath: yours
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114943503251874268, guid: 0d18888d78d9584429ee60f5fa6c5779,
+        type: 2}
+      propertyPath: castleName
+      value: Starkowie
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0d18888d78d9584429ee60f5fa6c5779, type: 2}
@@ -6588,6 +6599,7 @@ MonoBehaviour:
   wrogosc: 1
   yours: 0
   menuFunctions: {fileID: 1591208712}
+  castleName: set Your Own
 --- !u!65 &600864869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8154,11 +8166,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f28a7cb8968e0542a3273b04fa17ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptName: aa
+  doFabula: 1
+  scriptName: Barbarian Attack
   warior: {fileID: 368809608}
   attackTargetPerRound:
-  - {fileID: 1838778451}
   - {fileID: 0}
+  - {fileID: 1046118689}
   movePerRound:
   - {x: 0, y: 0, z: 0}
   - {x: 1205, y: 460, z: 738}
@@ -10249,6 +10262,11 @@ Transform:
   m_Father: {fileID: 537535934}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1046118689 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1761037489267018, guid: 4cd63d43d5283384892c144ac9d7b2ee,
+    type: 2}
+  m_PrefabInternal: {fileID: 1853100688}
 --- !u!1 &1058813487
 GameObject:
   m_ObjectHideFlags: 0
@@ -10346,6 +10364,7 @@ MonoBehaviour:
   wrogosc: 1
   yours: 0
   menuFunctions: {fileID: 1591208712}
+  castleName: set Your Own
 --- !u!65 &1063382989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10916,15 +10935,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4946711313122934, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -230.69995
+      value: 18.300049
       objectReference: {fileID: 0}
     - target: {fileID: 4946711313122934, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -13.799988
+      value: -8.799988
       objectReference: {fileID: 0}
     - target: {fileID: 4946711313122934, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -53.200012
+      value: -95.20001
       objectReference: {fileID: 0}
     - target: {fileID: 4946711313122934, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -10968,12 +10987,57 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1452002229337842, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
       propertyPath: m_Name
-      value: Wojska (1)
+      value: Barbarian
       objectReference: {fileID: 0}
     - target: {fileID: 195078717954137756, guid: c4091ad7b2225894fa6a317e22d2c7a4,
         type: 2}
       propertyPath: m_Speed
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114322117839258866, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: typeOfWarior
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: multi
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[0]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[1]
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 23028518437047646, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ec71ea8be891f5d4da59c9d05e38cb1c, type: 2}
+    - target: {fileID: 114093659200634858, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: WojskaName
+      value: Barbarian
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
@@ -11269,6 +11333,7 @@ MonoBehaviour:
   makeDistance: 0
   canBeMoved: 1
   yours: 1
+  WojskaName: 
 --- !u!54 &1226708365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12887,6 +12952,7 @@ MonoBehaviour:
   wrogosc: 1
   yours: 0
   menuFunctions: {fileID: 1591208712}
+  castleName: set Your Own
 --- !u!65 &1434093766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15882,6 +15948,31 @@ Prefab:
       propertyPath: m_Speed
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: multi
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[0]
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114020535870939600, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: quantityMilitaryMulti.Array.data[1]
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 114322117839258866, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: maxDistancePerRound
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114093659200634858, guid: c4091ad7b2225894fa6a317e22d2c7a4,
+        type: 2}
+      propertyPath: WojskaName
+      value: Starkowie
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c4091ad7b2225894fa6a317e22d2c7a4, type: 2}
   m_IsPrefabParent: 0
@@ -16563,11 +16654,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1821228739}
---- !u!1 &1838778451 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1452002229337842, guid: c4091ad7b2225894fa6a317e22d2c7a4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1767545345}
 --- !u!1001 &1840324153
 Prefab:
   m_ObjectHideFlags: 0
@@ -16818,12 +16904,12 @@ Prefab:
     - target: {fileID: 114092381992537568, guid: 4cd63d43d5283384892c144ac9d7b2ee,
         type: 2}
       propertyPath: wrogosc
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114092381992537568, guid: 4cd63d43d5283384892c144ac9d7b2ee,
         type: 2}
       propertyPath: yours
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cd63d43d5283384892c144ac9d7b2ee, type: 2}
@@ -18580,6 +18666,7 @@ MonoBehaviour:
   wrogosc: 1
   yours: 0
   menuFunctions: {fileID: 1591208712}
+  castleName: set Your Own
 --- !u!65 &2047610710
 BoxCollider:
   m_ObjectHideFlags: 0
