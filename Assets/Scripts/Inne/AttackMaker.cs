@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AttackMaker : MonoBehaviour
 {
-
+    private TextInfoShow textInfoShow;
     private MainManager mainManager;
     private int[] soldiersHP = new int[] { 110, 120, 130, 150, 50 };
     private int[] soldierDEF = new int[] { 50, 70, 80, 90, 20 };
@@ -15,6 +15,7 @@ public class AttackMaker : MonoBehaviour
 
     private void Start()
     {
+        textInfoShow = FindObjectOfType<TextInfoShow>();
         if (this.GetComponent<MeshRenderer>() == null)
         {
             this.gameObject.AddComponent<MeshRenderer>();
@@ -45,6 +46,7 @@ public class AttackMaker : MonoBehaviour
                 attacker.quantityMilitarySolo = ReparseToSoloSoldierQuantityMilitary(winner);
             }
             Destroy(defenderObject);
+           
         }
         else
         {
@@ -185,13 +187,13 @@ public class AttackMaker : MonoBehaviour
                 {
                     castle.yours = true;
                     castle.castleName = attackerSoldier.GetComponent<ObjectTransform>().WojskaName;
-                    Debug.Log("Gratulacje przejąłeś zamek");
+                    textInfoShow.showMassageWindow(textInfoShow.captureCastle, textInfoShow.captureCastleTitle);
                 }
                 else
                 {
                     castle.yours = false;
                     castle.castleName = attackerSoldier.GetComponent<ObjectTransform>().WojskaName;
-                    Debug.Log("Twój zamek przejął wróg");
+                    textInfoShow.showMassageWindow(textInfoShow.lostCastle, textInfoShow.lostCastleTitle);
                 }
                 castle.setCastleColor(attackerSoldier.wrogosc);
             }

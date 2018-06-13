@@ -940,7 +940,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502f7ef178797bb4b8849d2c008caa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menu: {fileID: 223194338468436228}
+  economyCanvas: {fileID: 0}
+  armyCanvas: {fileID: 0}
+  recruitmentCanvas: {fileID: 0}
+  nextRound: {fileID: 0}
+  popup: {fileID: 0}
+  cancelCanvas: {fileID: 0}
+  prefabCanvas: {fileID: 0}
+  infoWindow: {fileID: 0}
+  infoView: {fileID: 0}
+  army: []
+  text: {fileID: 0}
+  gold: {fileID: 0}
+  textPopup: {fileID: 0}
+  numberArmy: {fileID: 0}
+  numberArmy2: {fileID: 0}
+  numberArmy3: {fileID: 0}
+  numberArmy4: {fileID: 0}
+  numberArmy5: {fileID: 0}
+  numberInCastle0: {fileID: 0}
+  numberInCastle1: {fileID: 0}
+  numberInCastle2: {fileID: 0}
+  numberInCastle3: {fileID: 0}
+  numberInCastle4: {fileID: 0}
+  numberEconomy1: {fileID: 0}
+  numberEconomy2: {fileID: 0}
+  numberEconomy3: {fileID: 0}
+  numberEconomy4: {fileID: 0}
+  numberEconomy5: {fileID: 0}
+  numberEconomy6: {fileID: 0}
+  numberEconomyLvl0: {fileID: 0}
+  numberEconomyLvl1: {fileID: 0}
+  numberEconomyLvl2: {fileID: 0}
+  numberEconomyLvl3: {fileID: 0}
+  numberEconomyLvl4: {fileID: 0}
+  numberEconomyLvl5: {fileID: 0}
+  cancelArmy5: {fileID: 0}
+  cancelArmy4: {fileID: 0}
+  cancelArmy3: {fileID: 0}
+  cancelArmy2: {fileID: 0}
+  cancelArmy1: {fileID: 0}
+  cancelInfWindow: {fileID: 0}
 --- !u!114 &114489926413810834
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -66,8 +66,12 @@ public class CastleEntry : MonoBehaviour {
 
     private void OnMouseEnter()
     {
-        //showQuantityMilitaryInfo();
-        menuFunctions.PopupWindow(castleName+"\n ilosc wojsk: "+ quantityMilitary.ToString());
+        menuFunctions.PopupWindow(castleName+"\n Łucznicy: "+ quantityMilitary[0].ToString()
+            + "\n Konnica: " + quantityMilitary[1].ToString()
+            + "\n Piechota: " + quantityMilitary[2].ToString()
+            + "\n Wojownicy: " + quantityMilitary[3].ToString()
+            + "\n Szpiedzy: " + quantityMilitary[4].ToString()
+            );
     }
 
     private void OnMouseExit()

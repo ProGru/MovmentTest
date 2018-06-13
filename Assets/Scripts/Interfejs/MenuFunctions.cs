@@ -13,7 +13,10 @@ public class MenuFunctions : MonoBehaviour {
     public Canvas recruitmentCanvas;
     public Canvas nextRound;
     public Canvas popup;
+    public Canvas cancelCanvas;
+    public Canvas prefabCanvas;
     public GameObject infoWindow;
+    public GameObject infoView;
     public GameObject[] army;
     public Text text;
     public Text gold;
@@ -61,6 +64,7 @@ public class MenuFunctions : MonoBehaviour {
     public Button cancelArmy2;
     public Button cancelArmy1;
 
+    public Button cancelInfWindow;
 
     private void Start()
     {
@@ -72,13 +76,20 @@ public class MenuFunctions : MonoBehaviour {
         armyCanvas = armyCanvas.GetComponent<Canvas>();
         recruitmentCanvas = recruitmentCanvas.GetComponent<Canvas>();
         nextRound = nextRound.GetComponent<Canvas>();
+        cancelCanvas = cancelCanvas.GetComponent<Canvas>();
+        prefabCanvas = prefabCanvas.GetComponent<Canvas>();
+
+
         text = text.GetComponent<Text>();
         gold = gold.GetComponent<Text>();
         Time.timeScale = 1;
+        cancelCanvas.enabled = false;
         economyCanvas.enabled = false;
         armyCanvas.enabled = false;
         recruitmentCanvas.enabled = false;
-        infoWindow.SetActive(false);
+        infoWindow.SetActive(true);
+        cancelInfWindow = cancelInfWindow.GetComponent<Button>();
+
         GoldButton();
 
         numberArmy = numberArmy.GetComponent<Text>();
@@ -108,19 +119,10 @@ public class MenuFunctions : MonoBehaviour {
         numberEconomyLvl5 = numberEconomyLvl5.GetComponent<Text>();
 
         cancelArmy5 = cancelArmy5.GetComponent<Button>();
-        cancelArmy5.onClick.AddListener(CancelOnClick1);
-
         cancelArmy4 = cancelArmy4.GetComponent<Button>();
-        cancelArmy4.onClick.AddListener(CancelOnClick2);
-
         cancelArmy3 = cancelArmy3.GetComponent<Button>();
-        cancelArmy3.onClick.AddListener(CancelOnClick3);
-
         cancelArmy2 = cancelArmy2.GetComponent<Button>();
-        cancelArmy2.onClick.AddListener(CancelOnClick4);
-
         cancelArmy1 = cancelArmy1.GetComponent<Button>();
-        cancelArmy1.onClick.AddListener(CancelOnClick5);
         displayAnulacjaBouldings();
     }
 
@@ -132,6 +134,23 @@ public class MenuFunctions : MonoBehaviour {
     public void PopupWindowFalse()
     {
         popup.enabled = false;
+    }
+
+    public void showMassage(string title,string text)
+    {
+        CanvasCloser[] canvasClosers = FindObjectsOfType<CanvasCloser>();
+        if (canvasClosers.Length < 6)
+        {
+            GameObject infoCanvas = Instantiate(infoView, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), prefabCanvas.transform.parent) as GameObject;
+            infoCanvas.transform.position =
+                new Vector3(infoCanvas.transform.position.x + 50 * canvasClosers.Length,
+                infoCanvas.transform.position.y - 50 * canvasClosers.Length,
+                infoCanvas.transform.position.z);
+            mainManager.setParentPrefabCavas(infoCanvas);
+            infoCanvas.GetComponent<CanvasCloser>().setMainText(text);
+            infoCanvas.GetComponent<CanvasCloser>().setTitle(title);
+        }
+
     }
 
     /// <summary>
@@ -151,7 +170,6 @@ public class MenuFunctions : MonoBehaviour {
 
     public void ChangeAddMilitaryStatus(int i)
     {
-        Debug.Log("adam");
         if (castle.GetComponent<CastleEntry>().quantityMilitary[i] > 0)
         {
             if (castle.GetComponent<CastleEntry>().wrogosc < 1)
@@ -235,6 +253,7 @@ public class MenuFunctions : MonoBehaviour {
         castle = whithCastle;
         if (castle.GetComponent<CastleEntry>().wrogosc == 0)
         {
+            cancelCanvas.enabled = true;
             recruitmentCanvas.enabled = true;
             economyCanvas.enabled = false;
             armyCanvas.enabled = false;
@@ -252,6 +271,7 @@ public class MenuFunctions : MonoBehaviour {
 
     public void CloseCanvas()
     {
+        cancelCanvas.enabled = false;
         armyCanvas.enabled = false;
         economyCanvas.enabled = false;
         recruitmentCanvas.enabled = false;
@@ -444,11 +464,14 @@ public class MenuFunctions : MonoBehaviour {
         displayAnulacjaBouldings();
     }
 
-    public void rekrutujJednostke(int typeOfWarior)
-    {
-        Debug.Log("Rekrutuje" + typeOfWarior);
+    public void rekrutujJednostke(int typeOfWarior)    {
         mainManager.rekrutujJednostke(castle.GetComponent<CastleEntry>(), typeOfWarior);
         displayAnulacjaWojska();
+    }
+
+    public void CancelInfWindow()
+    {
+        infoWindow.SetActive(false);
     }
 
 }

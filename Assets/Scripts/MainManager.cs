@@ -20,6 +20,8 @@ public class MainManager : MonoBehaviour {
     public DestroyInterfejs destroyInterfejs;
     public ArrayList army= new ArrayList();
     public MenuFunctions menuFunctions;
+    private TextInfoShow textInfoShow;
+
     // drogi/zamek/targ/plac cwiczen/koszary/fortyfikacja
     public int gold = 1000;
     private ArrayList rekrutacjaQueue = new ArrayList();
@@ -45,6 +47,7 @@ public class MainManager : MonoBehaviour {
 
     public void Start()
     {
+        textInfoShow = FindObjectOfType<TextInfoShow>();
         //menuFunctions = GetComponent<MenuFunctions>();
         castles = Component.FindObjectsOfType<CastleEntry>();
         Soldier[] objectTransform = FindObjectsOfType<Soldier>();
@@ -62,6 +65,11 @@ public class MainManager : MonoBehaviour {
     public void setParentJednostki(GameObject obj)
     {
         obj.transform.parent = destroyJednostki.transform;
+    }
+
+    public void setParentPrefabCavas(GameObject obj)
+    {
+        obj.transform.parent = menuFunctions.prefabCanvas.transform;
     }
 
     public CastleEntry[] getCastles()
@@ -163,17 +171,17 @@ public class MainManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("not enought money!");
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
                 }
             }
             else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -189,18 +197,20 @@ public class MainManager : MonoBehaviour {
                     menuFunctions.GoldButton();
                     bouldingProgres[1] -= bouldingTime[1];
                     bouldingTime[1] += 1;
-                }else
-                {
-                    Debug.Log("not enought money!");
                 }
-            }else
+                else
+                {
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
+                }
+            }
+            else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -219,17 +229,17 @@ public class MainManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("not enought money!");
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
                 }
             }
             else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -248,17 +258,17 @@ public class MainManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("not enought money!");
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
                 }
             }
             else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -277,17 +287,17 @@ public class MainManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("not enought money!");
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
                 }
             }
             else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -306,17 +316,17 @@ public class MainManager : MonoBehaviour {
                 }
                 else
                 {
-                    Debug.Log("not enought money!");
+                    textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
                 }
             }
             else
             {
-                Debug.Log("Max boulding level!");
+                textInfoShow.showMassageWindow(textInfoShow.maxBouldingLvl, textInfoShow.maxBouldingLvlTitle);
             }
         }
         else
         {
-            Debug.Log("arleady in progres wait for finish to bouild more!");
+            textInfoShow.showMassageWindow(textInfoShow.arleadyBuilding, textInfoShow.arleadyBouldingTitle);
         }
     }
 
@@ -332,7 +342,7 @@ public class MainManager : MonoBehaviour {
                     bouldingbonus[i] += bouldingAddBonus[i];
                     bouldingLevel[i] += 1;
                     menuFunctions.displayBouldingLvl();
-                    Debug.Log("Bonus is now:" + bouldingbonus[i].ToString());
+                    textInfoShow.showMassageWindow(textInfoShow.bonus + bouldingbonus[i], textInfoShow.bonusTitle);
                 }
             }
         }
@@ -367,27 +377,33 @@ public class MainManager : MonoBehaviour {
             }
             gold += zwrot;
             menuFunctions.GoldButton();
-            Debug.Log("anulacja budowania" + boulding);
         }
     }
 
     public void rekrutujJednostke(CastleEntry castle, int typeOfWarior)
     {
-        RekrutacjaWojska rekrutacjaWojska = new RekrutacjaWojska();
-        rekrutacjaWojska.castle = castle;
-        rekrutacjaWojska.typeOfWarior = typeOfWarior;
-        rekrutacjaWojska.rouldLeft = -rekrutacjaTime[typeOfWarior];
-        rekrutacjaQueue.Add(rekrutacjaWojska);
-        gold -= armyGoldForEach[typeOfWarior];
-        menuFunctions.GoldButton();
+        if (gold >= armyGoldForEach[typeOfWarior])
+        {
+            RekrutacjaWojska rekrutacjaWojska = new RekrutacjaWojska();
+            rekrutacjaWojska.castle = castle;
+            rekrutacjaWojska.typeOfWarior = typeOfWarior;
+            rekrutacjaWojska.rouldLeft = -rekrutacjaTime[typeOfWarior];
+            rekrutacjaQueue.Add(rekrutacjaWojska);
+            gold -= armyGoldForEach[typeOfWarior];
+            menuFunctions.GoldButton();
+        }
+        else
+        {
+            textInfoShow.showMassageWindow(textInfoShow.noMoney, textInfoShow.noMoneyTitle);
+        }
     }
 
     public void addRekrutowaneJednostki()
     {
+        RekrutacjaWojska rekrutacjaWojska;
         for (int i = 0; i < rekrutacjaQueue.Count; i++)
         {
-            RekrutacjaWojska rekrutacjaWojska = (RekrutacjaWojska) rekrutacjaQueue[i];
-            Debug.Log(rekrutacjaWojska.rouldLeft);
+            rekrutacjaWojska = (RekrutacjaWojska) rekrutacjaQueue[i];
             if (rekrutacjaWojska.rouldLeft == -1)
             {
                 rekrutacjaWojska.castle.quantityMilitary[rekrutacjaWojska.typeOfWarior] += 50;
@@ -398,14 +414,18 @@ public class MainManager : MonoBehaviour {
                 rekrutacjaWojska.rouldLeft += 1;
             }
         }
+
         for (int i = 0; i < rekrutacjaQueue.Count; i++)
         {
-            RekrutacjaWojska rekrutacjaWojska = (RekrutacjaWojska)rekrutacjaQueue[i];
+            rekrutacjaWojska = (RekrutacjaWojska)rekrutacjaQueue[i];
             if (rekrutacjaWojska.rouldLeft == 0)
             {
                 rekrutacjaQueue.RemoveAt(i);
+                i = -1;
             }
+
         }
+
         menuFunctions.displayAnulacjaWojska();
         menuFunctions.displayMilitaryInCastle();
 
@@ -494,7 +514,7 @@ public class MainManager : MonoBehaviour {
         if (payment > gold)
         {
             warningForNoMoney += 1;
-            Debug.Log("Nie zarabiasz tyle ile powinienes");
+            textInfoShow.showMassageWindow(textInfoShow.waste, textInfoShow.wasteTitle);
         }
         gold -= payment;
     }

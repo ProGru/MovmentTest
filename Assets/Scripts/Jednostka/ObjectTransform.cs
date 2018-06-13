@@ -21,6 +21,7 @@ public class ObjectTransform : MonoBehaviour
     public bool canEntry = true;
     CastleEntry[] platforms;
     private MainManager mainManager;
+    private MenuFunctions menuFunctions;
     public float makeDistance = 0;
     public bool canBeMoved = true;
     public bool yours = false;
@@ -58,33 +59,37 @@ public class ObjectTransform : MonoBehaviour
     /// </summary>
     private void SetCastelsVisability()
     {
-        platforms = mainManager.getCastles();
-        for (int i=0; i<platforms.Length;i++){
-
-            if (disctance(newPosition, platforms[i].gameObject) <= 100)
-            {
-                if (!platforms[i].GetComponent<CastleEntry>().yours)
-                {
-                    platforms[i].gameObject.SetActive(true);
-                }
-            }
-        }
-        ArrayList army = mainManager.army;
-        for (int i = 0; i < army.Count; i++)
+        if (canEntry)
         {
-            Soldier soldier = (Soldier)army[i];
-            if (soldier != null)
+            platforms = mainManager.getCastles();
+            for (int i = 0; i < platforms.Length; i++)
             {
-                if (disctance(newPosition, soldier.gameObject) <= 100)
+
+                if (disctance(newPosition, platforms[i].gameObject) <= 100)
                 {
-                    soldier.gameObject.SetActive(true);
+                    if (!platforms[i].GetComponent<CastleEntry>().yours)
+                    {
+                        platforms[i].gameObject.SetActive(true);
+                    }
                 }
             }
-            else
+            ArrayList army = mainManager.army;
+            for (int i = 0; i < army.Count; i++)
             {
-                army.RemoveAt(i);
-            }
+                Soldier soldier = (Soldier)army[i];
+                if (soldier != null)
+                {
+                    if (disctance(newPosition, soldier.gameObject) <= 100)
+                    {
+                        soldier.gameObject.SetActive(true);
+                    }
+                }
+                else
+                {
+                    army.RemoveAt(i);
+                }
 
+            }
         }
     }
 
@@ -160,6 +165,7 @@ public class ObjectTransform : MonoBehaviour
 
     private void Start()
     {
+        menuFunctions = FindObjectOfType<MenuFunctions>();
         soldier = GetComponent<Soldier>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         newPosition = transform.position;
@@ -185,8 +191,30 @@ public class ObjectTransform : MonoBehaviour
         }
     }
 
+    public void showMillitaryInPopap()
+    {
+        Millitary millitary = this.GetComponent<Millitary>();
+        if (millitary.multi)
+        {
+            menuFunctions.PopupWindow(WojskaName + "\n Łucznicy: " + millitary.quantityMilitaryMulti[0].ToString()
+                + "\n Konnica: " + millitary.quantityMilitaryMulti[1].ToString()
+                + "\n Piechota: " + millitary.quantityMilitaryMulti[2].ToString()
+                + "\n Wojownicy: " + millitary.quantityMilitaryMulti[3].ToString()
+                + "\n Szpiedzy: " + millitary.quantityMilitaryMulti[4].ToString()
+                );
+        }
+        else
+        {
+            int type = millitary.GetComponent<Soldier>().typeOfWarior;
+            string[] wojska = { "Łucznicy", "Konnica", "Piechota", "Wojownicy", "Szpiedzy" };
+            menuFunctions.PopupWindow(WojskaName + "\n "+ wojska[type]+": " + millitary.quantityMilitaryMulti[0].ToString());
+        }
+    }
+
     private void OnMouseEnter()
     {
+        showMillitaryInPopap();
+        
         Renderer rend = GetComponent<Renderer>();
         showQuantityMilitaryInformation();
         if (rend.material.GetColor("_Color") != Color.red && rend.material.GetColor("_Color") != Color.yellow)
