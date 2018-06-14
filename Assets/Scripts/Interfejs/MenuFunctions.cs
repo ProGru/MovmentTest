@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class MenuFunctions : MonoBehaviour {
 
+    public Canvas sojuszCanvas;
     public Canvas economyCanvas;
     public Canvas armyCanvas;
     public Canvas recruitmentCanvas;
@@ -17,6 +18,7 @@ public class MenuFunctions : MonoBehaviour {
     public Canvas prefabCanvas;
     public GameObject infoWindow;
     public GameObject infoView;
+    public Canvas gameOver;
     public GameObject[] army;
     public Text text;
     public Text gold;
@@ -68,6 +70,8 @@ public class MenuFunctions : MonoBehaviour {
 
     private void Start()
     {
+        gameOver = gameOver.GetComponent<Canvas>();
+        sojuszCanvas = sojuszCanvas.GetComponent<Canvas>();
         popup = popup.GetComponent<Canvas>();
         popup.enabled = false;
         textPopup = textPopup.GetComponent<Text>();
@@ -87,6 +91,7 @@ public class MenuFunctions : MonoBehaviour {
         economyCanvas.enabled = false;
         armyCanvas.enabled = false;
         recruitmentCanvas.enabled = false;
+        gameOver.enabled = false;
         infoWindow.SetActive(true);
         cancelInfWindow = cancelInfWindow.GetComponent<Button>();
 
@@ -151,6 +156,13 @@ public class MenuFunctions : MonoBehaviour {
             infoCanvas.GetComponent<CanvasCloser>().setTitle(title);
         }
 
+    }
+
+    public void showMassageGameOver(string title, string text)
+    {
+        gameOver.enabled = true;
+        gameOver.GetComponent<CanvasCloser>().setTitle(title);
+        gameOver.GetComponent<CanvasCloser>().setMainText(text);
     }
 
     /// <summary>
@@ -229,6 +241,7 @@ public class MenuFunctions : MonoBehaviour {
             {
                 currentObject = Instantiate(army[createTypeOf], castle.transform.position + new Vector3(0, 0, 10), new Quaternion(0, transform.rotation.y, 0, transform.rotation.w), castle.transform.parent) as GameObject;
                 currentObject.GetComponent<ObjectTransform>().canEntry = false;
+                currentObject.GetComponent<ObjectTransform>().WojskaName = castle.GetComponent<CastleEntry>().castleName;
                 mainManager.setParentJednostki(currentObject);
             }
             currentObject.transform.position = detinationPosition;
@@ -267,6 +280,17 @@ public class MenuFunctions : MonoBehaviour {
         economyCanvas.enabled = true;
         recruitmentCanvas.enabled = false;
         displayBouldingLvl();
+    }
+
+    public void LoadSojuszCanvas()
+    {
+        sojuszCanvas.enabled = true;
+    }
+
+    public void CloseSojuszCanvas()
+    {
+        sojuszCanvas.enabled = false;
+
     }
 
     public void CloseCanvas()

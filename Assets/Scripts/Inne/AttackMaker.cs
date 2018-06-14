@@ -45,6 +45,12 @@ public class AttackMaker : MonoBehaviour
             {
                 attacker.quantityMilitarySolo = ReparseToSoloSoldierQuantityMilitary(winner);
             }
+            if (defenderObject.GetComponent<ObjectTransform>().goldBonus > 0)
+            {
+                mainManager.addGold(defenderObject.GetComponent<ObjectTransform>().goldBonus);
+                textInfoShow.showMassageWindow(textInfoShow.defeatEnemy + "\n Gold: " 
+                    + defenderObject.GetComponent<ObjectTransform>().goldBonus, textInfoShow.defeatEnemyTitle);
+            }
             Destroy(defenderObject);
            
         }
@@ -58,6 +64,12 @@ public class AttackMaker : MonoBehaviour
             {
                 defender.quantityMilitarySolo = ReparseToSoloSoldierQuantityMilitary(winner);
             }
+            if (attackerObject.GetComponent<ObjectTransform>().goldBonus > 0)
+            {
+                mainManager.addGold(attackerObject.GetComponent<ObjectTransform>().goldBonus);
+                textInfoShow.showMassageWindow(textInfoShow.defeatEnemy + "\n Gold: "
+                    + attackerObject.GetComponent<ObjectTransform>().goldBonus, textInfoShow.defeatEnemyTitle);
+            }
             Destroy(attackerObject);
         }
 
@@ -65,6 +77,7 @@ public class AttackMaker : MonoBehaviour
 
     public void makeSojusz(GameObject attackerObject, GameObject defenderObject)
     {
+        textInfoShow.showMassageWindow(textInfoShow.canNotAttackFriend, textInfoShow.canNotAttackFriendTitle);
         /*
         Millitary attacker = attackerObject.GetComponent<Millitary>();
         Soldier attackerSoldier = attackerObject.GetComponent<Soldier>();
@@ -171,6 +184,9 @@ public class AttackMaker : MonoBehaviour
                 castle.quantityMilitary[attackerSoldier.typeOfWarior] += attacker.quantityMilitarySolo;
             }
             Destroy(attackerObject);
+        }else if (attackerSoldier.wrogosc==0 && castle.wrogosc > 1)
+        {
+            makeSojusz(attackerObject,attackerObject);
         }
         else
         {
@@ -187,7 +203,10 @@ public class AttackMaker : MonoBehaviour
                 {
                     castle.yours = true;
                     castle.castleName = attackerSoldier.GetComponent<ObjectTransform>().WojskaName;
-                    textInfoShow.showMassageWindow(textInfoShow.captureCastle, textInfoShow.captureCastleTitle);
+                    textInfoShow.showMassageWindow(textInfoShow.captureCastle +
+                        "\n Za przejecie zamku otrzymujesz: "+castle.goldBonus, textInfoShow.captureCastleTitle);
+                    mainManager.addGold( castle.goldBonus);
+                    
                 }
                 else
                 {
@@ -201,8 +220,8 @@ public class AttackMaker : MonoBehaviour
             {
                 castle.quantityMilitary = ReparseToMultiSoldierQuantityMilitary(winer);
             }
+            Destroy(attackerObject);
         }
-        Destroy(attackerObject);
     }
 
     public ArrayList MultiSoldierParser(int[] millitary, int type)

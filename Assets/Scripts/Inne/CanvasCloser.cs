@@ -29,4 +29,9 @@ public class CanvasCloser : MonoBehaviour {
         title.text = text;
     }
 
+    public void quitGame()
+    {
+        Application.Quit();
+    }
+
 }

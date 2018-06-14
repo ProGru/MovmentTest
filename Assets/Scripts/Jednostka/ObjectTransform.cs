@@ -26,6 +26,7 @@ public class ObjectTransform : MonoBehaviour
     public bool canBeMoved = true;
     public bool yours = false;
     public string WojskaName;
+    public int goldBonus = 0;
 
 
     /// <summary>
@@ -231,7 +232,7 @@ public class ObjectTransform : MonoBehaviour
 
     private void OnMouseExit()
     {
-       
+        menuFunctions.PopupWindowFalse();
         Renderer rend = GetComponent<Renderer>();
         if (rend.material.GetColor("_Color") == Color.red)
         {

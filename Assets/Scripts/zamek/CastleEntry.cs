@@ -16,6 +16,7 @@ public class CastleEntry : MonoBehaviour {
     private Collider lastCollision;
     private AttackMaker attackMaker;
     public string castleName = "set Your Own";
+    public int goldBonus = 0;
     MainManager mainManager;
 
     public void setCastleColor(int i)

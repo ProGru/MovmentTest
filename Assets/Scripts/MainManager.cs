@@ -13,6 +13,7 @@ using UnityEngine.SceneManagement;
 /// -eventy
 /// </summary>
 public class MainManager : MonoBehaviour {
+    public string[] nazwyZamkow = { "Targaryen", "Tyrell", "Lannister" };
     public DestroyJednostki destroyJednostki;
     public DestroyKamera destroyKamera;
     public DestroyTeren destroyTeren;
@@ -21,7 +22,8 @@ public class MainManager : MonoBehaviour {
     public ArrayList army= new ArrayList();
     public MenuFunctions menuFunctions;
     private TextInfoShow textInfoShow;
-
+    private string[] bouldingNames = { "drogi", "zamek", "targ",
+        "plac cwiczen", "koszary", "fortyfikacja" };
     // drogi/zamek/targ/plac cwiczen/koszary/fortyfikacja
     public int gold = 1000;
     private ArrayList rekrutacjaQueue = new ArrayList();
@@ -43,6 +45,7 @@ public class MainManager : MonoBehaviour {
     private int[] armyGoldForEach = new int[] { 100, 100, 100, 100, 100 };
     private int paymentPerSingleWarrior = 5;
     private int warningForNoMoney = 0;
+    private int curentSojusz = -1;
 
 
     public void Start()
@@ -60,6 +63,12 @@ public class MainManager : MonoBehaviour {
         {
             objectTransform[i].GetComponent<ObjectTransform>().SetCastelsUnvisibility();
         }
+    }
+
+    public void addGold(int money)
+    {
+        gold += money;
+        menuFunctions.GoldButton();
     }
 
     public void setParentJednostki(GameObject obj)
@@ -99,14 +108,53 @@ public class MainManager : MonoBehaviour {
         }
         if (yourCastle == 0 || tura>20)
         {
-            Debug.Log("GameOver! przekroczyłeś 20 tur lub nie masz zamków");
-            Application.Quit();
+            textInfoShow.showGameOverWindow(textInfoShow.gameOverLessCastle,textInfoShow.gameOverTitle);
         }
         if (warningForNoMoney > 2)
         {
-            Debug.Log("GameOver jesteś zadłuzony");
-            Application.Quit();
+            textInfoShow.showGameOverWindow(textInfoShow.gameOverMoney, textInfoShow.gameOverTitle);
         }
+        if (yourCastle == castles.Length)
+        {
+            textInfoShow.showGameOverWindow(textInfoShow.win, textInfoShow.winTitle);
+        }
+    }
+
+    public void makeSojuszWith(int who)
+    {
+        curentSojusz = who;
+        for(int i = 0; i < castles.Length;i++)
+        {
+            if (castles[i].castleName.Equals(nazwyZamkow[who]))
+            {
+                castles[i].wrogosc = who+2;
+            }
+            else
+            {
+                if (castles[i].wrogosc != 0)
+                {
+                    castles[i].wrogosc = 1;
+                }
+            }
+        }
+
+        for (int i = 0; i < army.Count; i++)
+        {
+            Soldier soldier = (Soldier)army[i];
+            if (soldier.GetComponent<ObjectTransform>().WojskaName.Equals(nazwyZamkow[who]))
+            {
+                castles[i].wrogosc = who+2;
+            }
+            else
+            {
+                if (castles[i].wrogosc != 0)
+                {
+                    castles[i].wrogosc = 1;
+                }
+            }
+        }
+        
+        menuFunctions.CloseSojuszCanvas();
     }
 
     public void nextRound()
@@ -332,6 +380,8 @@ public class MainManager : MonoBehaviour {
 
     public void addBouldingBonus()
     {
+        int add = 0;
+        string massage = textInfoShow.bonus;
         for (int i=0; i < bouldingProgres.Length; i++)
         {
             if (bouldingProgres[i] != 0)
@@ -342,9 +392,14 @@ public class MainManager : MonoBehaviour {
                     bouldingbonus[i] += bouldingAddBonus[i];
                     bouldingLevel[i] += 1;
                     menuFunctions.displayBouldingLvl();
-                    textInfoShow.showMassageWindow(textInfoShow.bonus + bouldingbonus[i], textInfoShow.bonusTitle);
+                    massage += "\n dla " + bouldingNames[i] + " do " + bouldingbonus[i];
+                    add += 1;
                 }
             }
+        }
+        if (add > 0)
+        {
+            textInfoShow.showMassageWindow(massage, textInfoShow.bonusTitle);
         }
     }
 
@@ -513,8 +568,11 @@ public class MainManager : MonoBehaviour {
         }
         if (payment > gold)
         {
-            warningForNoMoney += 1;
-            textInfoShow.showMassageWindow(textInfoShow.waste, textInfoShow.wasteTitle);
+            if (warningForNoMoney < 3)
+            {
+                warningForNoMoney += 1;
+                textInfoShow.showMassageWindow(textInfoShow.waste, textInfoShow.wasteTitle);
+            }
         }
         gold -= payment;
     }
