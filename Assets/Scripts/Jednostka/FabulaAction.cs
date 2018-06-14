@@ -35,6 +35,7 @@ public class FabulaAction : MonoBehaviour
                         {
                             Debug.Log("i make attack");
                             warior.SetActive(true);
+                            attackTargetPerRound[mainManager.getTura()].SetActive(true);
                             warior.GetComponent<ObjectTransform>().setAttackTarget(attackTargetPerRound[mainManager.getTura()].transform.position);
                         }
                     }

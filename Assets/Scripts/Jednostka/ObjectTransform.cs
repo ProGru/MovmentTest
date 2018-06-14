@@ -60,7 +60,7 @@ public class ObjectTransform : MonoBehaviour
     /// </summary>
     private void SetCastelsVisability()
     {
-        if (canEntry)
+        if (canEntry && this.GetComponent<Soldier>().wrogosc==0)
         {
             platforms = mainManager.getCastles();
             for (int i = 0; i < platforms.Length; i++)

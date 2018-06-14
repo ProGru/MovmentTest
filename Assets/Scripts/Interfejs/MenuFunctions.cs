@@ -22,6 +22,7 @@ public class MenuFunctions : MonoBehaviour {
     public GameObject[] army;
     public Text text;
     public Text gold;
+    public Button sButton;
     GameObject currentObject = null;
     Vector3 detinationPosition;
     RaycastHit hit;
@@ -30,6 +31,7 @@ public class MenuFunctions : MonoBehaviour {
     private MainManager mainManager;
     private int createTypeOf;
     public Text textPopup;
+    public Text textInfWindow;
     /// <summary>
     /// ////
     /// </summary>
@@ -86,6 +88,7 @@ public class MenuFunctions : MonoBehaviour {
 
         text = text.GetComponent<Text>();
         gold = gold.GetComponent<Text>();
+        textInfWindow = textInfWindow.GetComponent<Text>();
         Time.timeScale = 1;
         cancelCanvas.enabled = false;
         economyCanvas.enabled = false;
@@ -94,6 +97,7 @@ public class MenuFunctions : MonoBehaviour {
         gameOver.enabled = false;
         infoWindow.SetActive(true);
         cancelInfWindow = cancelInfWindow.GetComponent<Button>();
+        sButton = sButton.GetComponent<Button>();
 
         GoldButton();
 
@@ -156,6 +160,17 @@ public class MenuFunctions : MonoBehaviour {
             infoCanvas.GetComponent<CanvasCloser>().setTitle(title);
         }
 
+    }
+    public void enableAll()
+    {
+        popup.enabled = false;
+        cancelCanvas.enabled = false;
+        economyCanvas.enabled = false;
+        armyCanvas.enabled = false;
+        gameOver.enabled = false;
+        recruitmentCanvas.enabled = false;
+        infoWindow.SetActive(false);
+        sojuszCanvas.enabled = false;
     }
 
     public void showMassageGameOver(string title, string text)
@@ -507,6 +522,18 @@ public class MenuFunctions : MonoBehaviour {
     public void CancelInfWindow()
     {
         infoWindow.SetActive(false);
+    }
+
+    public void ShowAlianceWindow()
+    {
+        sojuszCanvas.enabled = true;
+    }
+
+    public void InfWindowTest(string message)
+    {
+        infoWindow.SetActive(true);
+        textInfWindow.text = message;
+
     }
 
 }

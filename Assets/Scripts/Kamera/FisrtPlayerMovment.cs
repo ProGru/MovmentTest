@@ -17,10 +17,12 @@ public class FisrtPlayerMovment : MonoBehaviour {
     Rigidbody _rigidbody;
     Rect position;
     public Texture2D crosshairTExture;
+    MenuFunctions menuFunctions;
 
 
 
     void Start () {
+        menuFunctions = FindObjectOfType<MenuFunctions>();
         position = new Rect((Screen.width - crosshairTExture.width) / 2, (Screen.height - crosshairTExture.height) / 2, crosshairTExture.width, crosshairTExture.height);
         if (lockCursor)
         {
@@ -50,6 +52,7 @@ public class FisrtPlayerMovment : MonoBehaviour {
 
         if (Input.GetKeyDown("escape"))
         {
+            menuFunctions.enableAll();
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

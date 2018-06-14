@@ -287,7 +287,47 @@ public class MainManager : MonoBehaviour {
             menuFunctions.displayAnulacjaBouldings();
             if (tura == 1)
             {
-                
+                menuFunctions.InfWindowTest("Steruj kamerą uzywając klawiszy w,a,s,d oraz ustalaj kierunek prawym przyciskim myszy");
+            }else if (tura == 2)
+            {
+                menuFunctions.InfWindowTest("Rozbuduj targ by otrzymać więcej złota co rundę.");
+            }
+            else if (tura == 3)
+            {
+                menuFunctions.InfWindowTest("Twój szpieg jest łatwym celem dla wroga - poruszaj się nim ostrożnie.");
+            }
+            else if (tura == 4)
+            {
+                menuFunctions.InfWindowTest("Szpieg jest szybszy niż inne jednostki - możesz próbować uciekać nim z zasięgu wroga");
+            }
+            else if (tura == 5)
+            {
+                menuFunctions.InfWindowTest("Jednostki w zamku dostają bonusy za twoje budynki - \n więcej DEF, HP i ATAK");
+            }
+            else if (tura == 6)
+            {
+                menuFunctions.InfWindowTest("Pamiętaj że celem gry jest przejęcie wszystkich zamków w ciągu 20 tur");
+            }
+            else if (tura == 7)
+            {
+                menuFunctions.InfWindowTest("Utrzymanie wojska kosztuje - nie daj się zadłużyć.");
+            }
+            else if (tura == 8)
+            {
+                menuFunctions.InfWindowTest("Kończąc truę bez zamku przegrywasz!");
+            }
+            else if (tura == 9)
+            {
+                menuFunctions.InfWindowTest("Każda jednostka ma swoje słabości i atuty wykożystaj je dobrze");
+            }else if (tura == 10)
+            {
+                menuFunctions.InfWindowTest("Pokonując wrogie jednostki możesz otrzymać złoto!");
+            }else if (tura == 11)
+            {
+                menuFunctions.InfWindowTest("Przytrzymując CTRL możesz zaznaczyć więcej jednostek na raz");
+            }else if (tura == 12)
+            {
+                menuFunctions.InfWindowTest("Raz na turę możesz wybrac Sojusznika");
             }
         }
     }

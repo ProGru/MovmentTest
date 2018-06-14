@@ -12,19 +12,21 @@ public class Menu : MonoBehaviour {
 
 	void OnGUI()
 	{
-		GUI.DrawTexture(new Rect (0, 0, 800, 300), GameLogo);
+		GUI.DrawTexture(new Rect (0, 0, 1200, 600), GameLogo);
+        GUI.DrawTexture(new Rect(900, 400, 1200, 600), GameLogo);
 
-		if(GUI.Button(new Rect (200, 100, buttonWidth, buttonHeight), "New Game")) {
+
+        if (GUI.Button(new Rect (900, 400, buttonWidth, buttonHeight), "Game")) {
             Application.LoadLevel("Scene");
         }
-        if (GUI.Button(new Rect (200, 100 + buttonHeight + buttonMargin, buttonWidth, buttonHeight), "Save")) {
+        if (GUI.Button(new Rect (900, 400 + buttonHeight + buttonMargin, buttonWidth, buttonHeight), "Save")) {
 
 		}
-		if(GUI.Button(new Rect (200, 100 + (buttonHeight + buttonMargin) * 2, buttonWidth, buttonHeight), "Load")) {
+		if(GUI.Button(new Rect (900, 400 + (buttonHeight + buttonMargin) * 2, buttonWidth, buttonHeight), "Load")) {
 
 		}
 
-		if(GUI.Button(new Rect (200, 100 + (buttonHeight + buttonMargin) * 3, buttonWidth, buttonHeight), "Exit")) {
+		if(GUI.Button(new Rect (900, 400 + (buttonHeight + buttonMargin) * 3, buttonWidth, buttonHeight), "Exit")) {
 			Application.Quit();
 		}
 	}
