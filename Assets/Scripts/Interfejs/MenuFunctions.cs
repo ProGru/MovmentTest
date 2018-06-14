@@ -165,6 +165,17 @@ public class MenuFunctions : MonoBehaviour {
         gameOver.GetComponent<CanvasCloser>().setMainText(text);
     }
 
+    public void showJednostkaInfo(int index)
+    {
+        PopupWindow(mainManager.getJednostkaName(index) + "\n Rekrutacja tury: "
+            + mainManager.getRekrutacjaTime(index) + "\n" + mainManager.getSojdierInfo(index));
+    }
+
+    public void showBouldingInfo(int index)
+    {
+        PopupWindow(mainManager.getBouldingInfo(index));
+    }
+
     /// <summary>
     /// zmiana tury
     /// </summary>

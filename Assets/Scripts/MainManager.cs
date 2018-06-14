@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 /// -eventy
 /// </summary>
 public class MainManager : MonoBehaviour {
-    public string[] nazwyZamkow = { "Targaryen", "Tyrell", "Lannister" };
+    public string[] nazwyZamkow = { "Targaryen", "Tyrell", "Lannister", "Nikt" };
     public DestroyJednostki destroyJednostki;
     public DestroyKamera destroyKamera;
     public DestroyTeren destroyTeren;
@@ -24,13 +24,14 @@ public class MainManager : MonoBehaviour {
     private TextInfoShow textInfoShow;
     private string[] bouldingNames = { "drogi", "zamek", "targ",
         "plac cwiczen", "koszary", "fortyfikacja" };
+    private string[] jednostkaNemes = { "Łucznicy", "Konnica", "Piechota", "Wojownicy", "Szpiedzy" };
     // drogi/zamek/targ/plac cwiczen/koszary/fortyfikacja
     public int gold = 1000;
     private ArrayList rekrutacjaQueue = new ArrayList();
     private int[] rekrutacjaTime = new int[] { 2, 1, 2, 3, 2 };
     private int[] bouldingLevel = new int[] { 0, 0, 0, 0, 0, 0 };
     public int[] bouldingbonus = new int[] { 0, 0, 1000, 0, 0, 0 };
-    static private int[] bouldingAddBonus = new int[] {100,100,100,100,100,100};
+    static private int[] bouldingAddBonus = new int[] {100,100,2000,100,100,100};
     private int[] bouldingProgres = new int[] { 0, 0, 0, 0, 0, 0 };
     private int[] bouldingTime = new int[] { 2, 2, 3, 2, 3, 2 };
     private int tura = 0;
@@ -45,7 +46,9 @@ public class MainManager : MonoBehaviour {
     private int[] armyGoldForEach = new int[] { 100, 100, 100, 100, 100 };
     private int paymentPerSingleWarrior = 5;
     private int warningForNoMoney = 0;
-    private int curentSojusz = -1;
+    private int curentSojusz = 3;
+    private int rundaSojusz = -1;
+    private AttackMaker attackMaker = new AttackMaker();
 
 
     public void Start()
@@ -71,6 +74,89 @@ public class MainManager : MonoBehaviour {
         menuFunctions.GoldButton();
     }
 
+    public int getRekrutacjaTime(int index)
+    {
+        return rekrutacjaTime[index];
+    }
+
+    public string getSojdierInfo(int index)
+    {
+        return attackMaker.getSoldierInfo(index);
+    }
+
+    public string getBouldingInfo(int index)
+    {
+        string message = getBouldingName(index) + "\n";
+        if (index == 0)
+        {
+            if (drogiGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + drogiGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }else if (index == 1)
+        {
+            if (zamekGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + zamekGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }
+        else if (index == 2)
+        {
+            if (targGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + targGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }
+        else if (index == 3)
+        {
+            if (placGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + placGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }
+        else if (index == 4)
+        {
+            if (koszaryGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + koszaryGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }
+        else if (index == 5)
+        {
+            if (fortyfikacjaGoldForLvl.Length > (bouldingLevel[index]))
+            {
+                message += "cena za next Lvl: " + fortyfikacjaGoldForLvl[bouldingLevel[index]] + "\n";
+            }
+            else
+            {
+                message += "max Lvl \n";
+            }
+        }
+        message += "aktualny bonus: " + bouldingbonus[index];
+        message += "\npo ulepszeniu: " + (bouldingbonus[index] + bouldingAddBonus[index]);
+        return message;
+    }
+
     public void setParentJednostki(GameObject obj)
     {
         obj.transform.parent = destroyJednostki.transform;
@@ -86,6 +172,16 @@ public class MainManager : MonoBehaviour {
         return castles;
     }
 
+    public string getBouldingName(int index)
+    {
+        return bouldingNames[index];
+    }
+
+    public string getJednostkaName(int index)
+    {
+        return jednostkaNemes[index];
+    }
+
     public int[] getBouldingProgres()
     {
         return bouldingProgres;
@@ -96,7 +192,7 @@ public class MainManager : MonoBehaviour {
         return bouldingLevel;
     }
 
-    public void itsAGameOver()
+    public bool itsAGameOver()
     {
         int yourCastle = 0;
         for (int i =0; i < castles.Length; i++)
@@ -106,71 +202,94 @@ public class MainManager : MonoBehaviour {
                 yourCastle += 1;
             }
         }
-        if (yourCastle == 0 || tura>20)
+        if (yourCastle == 0 || tura>19)
         {
-            textInfoShow.showGameOverWindow(textInfoShow.gameOverLessCastle,textInfoShow.gameOverTitle);
+            textInfoShow.showGameOverWindow(textInfoShow.gameOverLessCastle, textInfoShow.gameOverTitle);
+            return true;
         }
         if (warningForNoMoney > 2)
         {
             textInfoShow.showGameOverWindow(textInfoShow.gameOverMoney, textInfoShow.gameOverTitle);
+            return true;
         }
         if (yourCastle == castles.Length)
         {
             textInfoShow.showGameOverWindow(textInfoShow.win, textInfoShow.winTitle);
+            return true;
         }
+        return false;
     }
 
     public void makeSojuszWith(int who)
     {
-        curentSojusz = who;
-        for(int i = 0; i < castles.Length;i++)
+        if (tura != rundaSojusz)
         {
-            if (castles[i].castleName.Equals(nazwyZamkow[who]))
+            Debug.Log(who);
+            curentSojusz = who;
+            for (int i = 0; i < castles.Length; i++)
             {
-                castles[i].wrogosc = who+2;
-            }
-            else
-            {
-                if (castles[i].wrogosc != 0)
+                if (castles[i].castleName.Equals(nazwyZamkow[who]))
                 {
-                    castles[i].wrogosc = 1;
+                    castles[i].wrogosc = who + 2;
+                }
+                else
+                {
+                    if (castles[i].wrogosc != 0)
+                    {
+                        castles[i].wrogosc = 1;
+                    }
                 }
             }
-        }
 
-        for (int i = 0; i < army.Count; i++)
-        {
-            Soldier soldier = (Soldier)army[i];
-            if (soldier.GetComponent<ObjectTransform>().WojskaName.Equals(nazwyZamkow[who]))
+            for (int i = 0; i < army.Count; i++)
             {
-                castles[i].wrogosc = who+2;
-            }
-            else
-            {
-                if (castles[i].wrogosc != 0)
+                Soldier soldier = (Soldier)army[i];
+                if (soldier.GetComponent<ObjectTransform>().WojskaName.Equals(nazwyZamkow[who]))
                 {
-                    castles[i].wrogosc = 1;
+                    soldier.wrogosc = who + 2;
+                }
+                else
+                {
+                    if (soldier.wrogosc != 0)
+                    {
+                        soldier.wrogosc = 1;
+                    }
                 }
             }
+
+            menuFunctions.CloseSojuszCanvas();
+            if (curentSojusz != 3)
+            {
+                rundaSojusz = tura;
+            }
         }
-        
-        menuFunctions.CloseSojuszCanvas();
+        else
+        {
+            menuFunctions.CloseSojuszCanvas();
+            textInfoShow.showMassageWindow(textInfoShow.sojusz+nazwyZamkow[curentSojusz], textInfoShow.sojuszTitle);
+        }
     }
 
     public void nextRound()
     {
-        itsAGameOver();
-        ObjectTransform[] wojska = FindObjectsOfType<ObjectTransform>();
-        for (int i = 0; i < wojska.Length; i++)
+        if (!itsAGameOver())
         {
-            wojska[i].makeDistance = 0;
+            ObjectTransform[] wojska = FindObjectsOfType<ObjectTransform>();
+            for (int i = 0; i < wojska.Length; i++)
+            {
+                wojska[i].makeDistance = 0;
+            }
+            tura += 1;
+            addBouldingBonus();
+            addRekrutowaneJednostki();
+            wyplata();
+            poborZaJednostki();
+            menuFunctions.displayAnulacjaBouldings();
+            if (tura == 1)
+            {
+                
+            }
         }
-        tura += 1;
-        addBouldingBonus();
-        addRekrutowaneJednostki();
-        wyplata();
-        poborZaJednostki();
-        menuFunctions.displayAnulacjaBouldings();
     }
 
     public int getTura()

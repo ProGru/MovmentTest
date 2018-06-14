@@ -403,6 +403,7 @@
     <Compile Include="Assets\Knight\scripts\rotator.cs" />
     <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\Scripts\AnimatorControlerKnight.cs" />
+    <Compile Include="Assets\Scripts\Destroy\DestroyFabula.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyInterfejs.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyJednostki.cs" />
     <Compile Include="Assets\Scripts\Destroy\DestroyKamera.cs" />

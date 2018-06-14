@@ -120,6 +120,8 @@ MonoBehaviour:
   makeDistance: 0
   canBeMoved: 1
   yours: 0
+  WojskaName: 
+  goldBonus: 0
 --- !u!114 &114116575421849548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,8 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c73aa15d3229cc49a447325c44fb08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  maxDistancePerRound: 100
+  speed: 15
+  maxDistancePerRound: 500
   wrogosc: 0
   typeOfWarior: 4
 --- !u!114 &114337781386765628

@@ -56,7 +56,7 @@ public class OponentInteligence : MonoBehaviour {
         Soldier[] soldiers = FindObjectsOfType<Soldier>();
         for (int i = 0; i < soldiers.Length; i++)
         {
-            if (soldiers[i].wrogosc == 0 && soldiers[i].GetComponent<Millitary>().multi==false && soldiers[i].typeOfWarior == 4)
+            if (soldiers[i].wrogosc == 0 && soldiers[i].GetComponent<Millitary>().multi==false && soldiers[i].typeOfWarior == 4 && this.GetComponent<Soldier>().wrogosc==1)
             {
                 if (disctance(this.transform.position, soldiers[i].gameObject) < 100)
                 {

@@ -12,6 +12,10 @@ public class AttackMaker : MonoBehaviour
 
     private bool winAttacker = false;
 
+    public string getSoldierInfo(int index)
+    {
+        return "HP: " + soldiersHP[index] + "\n DEF: " + soldierDEF[index] + "\n ATACK: " + soldierATACK[index];
+    }
 
     private void Start()
     {
@@ -303,7 +307,7 @@ public class AttackMaker : MonoBehaviour
         if (defender.multi == true)
         {
             defenderArray = MultiSoldierParser(defender.quantityMilitaryMulti, defenderType);
-            defenderArrayDestroy = MultiSoldierParser(attacker.quantityMilitaryMulti, defenderType);
+            defenderArrayDestroy = MultiSoldierParser(defender.quantityMilitaryMulti, defenderType);
         }
         else
         {
@@ -311,6 +315,8 @@ public class AttackMaker : MonoBehaviour
             defenderArrayDestroy = SingleSoldierParser(defender.quantityMilitarySolo, defender.GetComponent<Soldier>().typeOfWarior, defenderType);
 
         }
+        Debug.Log(defenderArrayDestroy.Count);
+        Debug.Log(attackerArrayDestroy.Count);
 
         int ile = (attackerArray.Count + defenderArray.Count) / 5;
         for (int j = 0; j < ile; j++)
@@ -329,7 +335,6 @@ public class AttackMaker : MonoBehaviour
                     int obroncaDEF = soldierObronca.defence;
                     soldierObronca.defence -= attack;
                     attack -= obroncaDEF;
-                    Debug.Log(attack);
 
                     if (attack > 0)
                     {
@@ -428,6 +433,16 @@ public class AttackMaker : MonoBehaviour
                 SingleSoldier soldier1 = (SingleSoldier)defenderArray[i];
                 soldier.attack += mainManager.bouldingbonus[5];
                 soldier1.attack += mainManager.bouldingbonus[5];
+
+            }
+        }else
+        {
+            for (int i = 0; i < defenderArray.Count; i++)
+            {
+                SingleSoldier soldier = (SingleSoldier)defenderArray[i];
+                SingleSoldier soldier1 = (SingleSoldier)defenderArray[i];
+                soldier.attack += 30;
+                soldier1.attack += 30;
 
             }
         }

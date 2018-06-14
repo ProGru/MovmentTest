@@ -28,6 +28,8 @@ public class TextInfoShow : MonoBehaviour {
     public string gameOverMoney = "GameOver jesteś zadłuzony";
     public string win = "Gratulacje zdołałeś podbić cały kontynent !!";
     public string winTitle = "Win !!!";
+    public string sojusz = "Masz już sojusz z :";
+    public string sojuszTitle = "Nie Możesz Zawrzeć sojuszu";
 
     void Start () {
         menuFunctions = FindObjectOfType<MenuFunctions>();

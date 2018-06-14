@@ -207,8 +207,7 @@ public class ObjectTransform : MonoBehaviour
         else
         {
             int type = millitary.GetComponent<Soldier>().typeOfWarior;
-            string[] wojska = { "Łucznicy", "Konnica", "Piechota", "Wojownicy", "Szpiedzy" };
-            menuFunctions.PopupWindow(WojskaName + "\n "+ wojska[type]+": " + millitary.quantityMilitaryMulti[0].ToString());
+            menuFunctions.PopupWindow(WojskaName + "\n "+ mainManager.getJednostkaName(type) +": " + millitary.quantityMilitarySolo.ToString());
         }
     }
 
@@ -217,7 +216,6 @@ public class ObjectTransform : MonoBehaviour
         showMillitaryInPopap();
         
         Renderer rend = GetComponent<Renderer>();
-        showQuantityMilitaryInformation();
         if (rend.material.GetColor("_Color") != Color.red && rend.material.GetColor("_Color") != Color.yellow)
         {
             beforeColor = rend.material.GetColor("_Color");
